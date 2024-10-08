@@ -13,13 +13,6 @@ public class AdminDAO {
 	String user = "scott";
 	String password = "tiger";
 
-	// dbcon()
-	// close()
-	// selectAll() : 전체조회
-	// insert() : 등록
-	// update() : 수정
-	// delete() : 석제
-	// selectOne() : 한개 조회
 
 	private Connection dbcon() {
 		Connection con = null;
@@ -118,6 +111,30 @@ public class AdminDAO {
 		}
 		return admin;
 	}
+	
+	public int update(Admin admin) {
+		int rRow = 0;
+		Connection con = dbcon();
+		PreparedStatement pst = null;
+		
+		String sql = "update usertbl set password = ?, phone = ?, address = ? where id = ?";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, admin.getPw());
+			pst.setString(2, admin.getPhone());
+			pst.setString(3, admin.getAddress());
+			pst.setString(4, admin.getId());
+			rRow = pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbclose(con, pst);
+		}
+		
+		return rRow;
+	}
+		
 	
 	
 	public static void main(String[] args) {

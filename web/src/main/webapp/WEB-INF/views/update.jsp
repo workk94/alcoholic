@@ -46,13 +46,13 @@
             <h1 class="title">UPDATE</h1>
             <div class="input_wrap">
             <%Admin admin =(Admin) request.getAttribute("admin"); %>
-                <p>이름 : <%=admin.getName() %> </p>
-                <p>주민등록번호 : <%=admin.getSsn() %> </p>
-                <p>아이디 : <%=admin.getId() %> </p>
-                <p>비밀번호 : <input id="pw" type="text" value="<%=admin.getPw() %>"></p>
-                <p>비밀번호 확인 : <input id="pw2" type="text"  value="<%=admin.getPw() %>"></p>
-                <p>전화번호 : <input id="phone" type="text"  value="<%=admin.getPhone() %>"></p>
-                <p>주소 : <input id="address" type="text"  value="<%=admin.getAddress() %>"></p>
+                <p>이름 : <input name ="id" type="text" value="<%=admin.getName() %>" readonly="readonly"> </p>
+                <p>주민등록번호 : <input name ="id" type="text" value="<%=admin.getSsn() %>" readonly="readonly"></p>
+                <p>아이디 : <input name ="id" type="text" value="<%=admin.getId() %>" readonly="readonly"> </p>
+                <p>비밀번호 : <input name="pw" type="text" value="<%=admin.getPw() %>"></p>
+                <p>비밀번호 확인 : <input name="pw2" type="text"  value="<%=admin.getPw() %>"></p>
+                <p>전화번호 : <input name="phone" type="text"  value="<%=admin.getPhone() %>"></p>
+                <p>주소 : <input name="address" type="text"  value="<%=admin.getAddress() %>"></p>
                 <a href="">수정하기</a>
             </div>
         </div>
