@@ -14,14 +14,13 @@
 
 <table>
 <tr>
-
-<th>리뷰번호</th>
-<th>제품 번호</th>
-<th>아이템 번호</th>
-<th>리뷰 내용</th>
-<th> 평점 </th>
-<th>작성자</th>
-<th>작성일</th>
+	<th>리뷰번호</th>
+	<th>제품번호</th>
+	<th>아이템 번호</th>
+	<th>리뷰 내용</th>
+	<th> 평점 </th>
+	<th>작성자</th>
+	<th>작성일</th>
 </tr>
 
 <% ArrayList<Review> list = (ArrayList<Review>) request.getAttribute("reviewOne");

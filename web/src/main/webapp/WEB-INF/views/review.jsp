@@ -18,21 +18,25 @@ table {
 <table>
 	<tr>
 	<th>리뷰번호</th>
+	<th>제품번호</th>
 	<th>아이템 번호</th>
 	<th>리뷰 내용</th>
+	<th> 평점 </th>
 	<th>작성자</th>
 	<th>작성일</th>
-	<td> <a href = "/web/reviewOne"> no.1 </a> </td>
+	<td> <a href = "/web.review/reviewOne"> no.1 </a> </td>
 	</tr>
 <% ArrayList<Review> list = (ArrayList<Review>) request.getAttribute("allList");
 for (Review review : list) {
  %>
 <tr> 
 <td><%=review.getReview_no() %> </td>
-<td> <%=review.getItem_no() %> WiskeyNO.1</td>
-<td> <%=review.getContents() %> 오크향이 풍부해요</td>
-<td> <%=review.getUser_id() %> 알콜홀릭</td>
-<td> <%=review.getCreated_at() %> 24.10.08</td>
+<td><%=review.getProduct_no() %> </td>
+<td> <%=review.getItem_no() %> </td>
+<td> <%=review.getContents() %> </td>
+<td> <%=review.getRating() %> </td>
+<td> <%=review.getUser_id() %></td>
+<td> <%=review.getCreated_at() %></td>
 
 </tr>
  <%} %>
