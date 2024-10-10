@@ -186,12 +186,13 @@ main {
     font-weight: 500;
     padding-left: 15px;
 }
-
-.input_wrap a {
+button{
+    border : 0;
+    background-color: transparent;
     font-weight: 500;
     font-size: 12px;
 }
-.input_wrap a:hover {
+button:hover{
     text-decoration: underline;
     cursor: pointer;
 }

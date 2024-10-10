@@ -11,7 +11,11 @@ public class Admin {
 	public Admin() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
+
+
+
+
 	public Admin(String id, String pw, String name, String ssn, String phone, String address) {
 		super();
 		this.id = id;
@@ -21,13 +25,8 @@ public class Admin {
 		this.phone = phone;
 		this.address = address;
 	}
-	public Admin(String id, String pw, String name, String phone) {
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.phone = phone;
-	}
-	
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", pw=" + pw + ", name=" + name + ", ssn=" + ssn + ", phone=" + phone + ", address="
