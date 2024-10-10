@@ -43,7 +43,7 @@ public class AdminUpdate extends HttpServlet{
 		
 		req.setAttribute("admin", admin);
 		
-		req.getRequestDispatcher("WEB-INF/views/update.jsp").forward(req, resp);
+		req.getRequestDispatcher("WEB-INF/views/admin_update.jsp").forward(req, resp);
 		
 		
 		

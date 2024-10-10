@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
-   <link rel="stylesheet" href="css/update.css">
+   <link rel="stylesheet" href="css/admin_update.css">
 
    
 </head>
@@ -91,7 +91,7 @@
                     alert("비밀번호가 일치하지 않습니다.");
                     return false; 
                 }
-                return true; 
+                return confirm("정말 수정하시겠습니까?")
             }
 
 
