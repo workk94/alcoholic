@@ -1,6 +1,7 @@
 package web.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +19,18 @@ public class AdminUpdate extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
-		String name = req.getParameter("name");
+		String phone = req.getParameter("phone");
+		String address = req.getParameter("address");
 		
+		Admin admin = new Admin(id, pw, null, null, phone, address);
+		
+		AdminService s = new AdminService();
+		s.updateAdmin(admin);
+		
+		ArrayList<Admin> list = s.getAdminList();
+		
+		req.setAttribute("list", list);
+		req.getRequestDispatcher("WEB-INF/views/admin.jsp").forward(req, resp);
 	}
 	
 	@Override

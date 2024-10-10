@@ -13,4 +13,8 @@ public class AdminService {
 	public Admin getAdminDetail(String id) {
 		return dao.selectOne(id);
 	}
+	
+	public int updateAdmin(Admin admin) {
+		return dao.update(admin);
+	}
 }

@@ -56,7 +56,7 @@ public class AdminDAO {
 		con = dbcon();
 		try {
 
-			String sql = "select id,password,name,phone from usertbl";
+			String sql = "select id,password,name,ssn,phone,address from usertbl";
 
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
@@ -65,9 +65,11 @@ public class AdminDAO {
 				String id = rs.getString(1);
 				String pw = rs.getString(2);
 				String name = rs.getString(3);
-				String phone = rs.getString(4);
+				String ssn = rs.getString(4);
+				String phone = rs.getString(5);
+				String address = rs.getString(6);
 
-				Admin user = new Admin(id, pw, name, phone);
+				Admin user = new Admin(id, pw, name, ssn,phone,address);
 
 				list.add(user);
 			}
@@ -142,7 +144,10 @@ public class AdminDAO {
 		ArrayList<Admin> s = dao.selectAll();
 		System.out.println(s);
 		
-		Admin admin = dao.selectOne("paulbaek");
-		System.out.println(admin);
+		Admin admin = new Admin("paulbaek", "paul133", null, null, "010-9353-1903", "서울시 마포구");
+		int i = dao.update(admin);
+		System.out.println(i);
+		ArrayList<Admin> s2 = dao.selectAll();
+		System.out.println(s2);
 	}
 }
