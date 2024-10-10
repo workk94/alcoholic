@@ -79,5 +79,42 @@ public class UserDAO {
 
 	    return user;
 	}
+	
+	
+	// db에 값이 정상적으로 등록되면 1, 아니면 -1을 반환
+	public int insertUser(User user) {		
+		
+		String sql = "INSERT INTO USERTBL(id, password, name, ssn, phone, address)"
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		
+		try (Connection con = dbCon();
+				PreparedStatement pst = con.prepareStatement(sql)){
+			
+			pst.setString(1, user.getId());
+			pst.setString(2, user.getPw());
+			pst.setString(3, user.getName());
+			pst.setString(4, user.getSsn());
+			pst.setString(5, user.getPhone());
+			pst.setString(6, user.getAddr());
+			int result = pst.executeUpdate();
+			
+			return result;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+		
+	}
+	
+	//test
+	public static void main(String[] args) {
+		UserDAO dao = new UserDAO();
+		
+		//User user = new User("test10", "test", "test", "test", "test", "test");
+		
+		//System.out.println(dao.insertUser(user));
+	}
 
 }
