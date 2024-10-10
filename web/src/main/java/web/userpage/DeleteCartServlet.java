@@ -37,7 +37,7 @@ public class DeleteCartServlet extends HttpServlet{
 			cartList.remove(removeNum);
 		}
 		
-		resp.sendRedirect("/web.userpage/cart");
+		resp.sendRedirect("/web/cart");
 	}
 	
 }

@@ -25,14 +25,14 @@
 <td><%= product.getProd_no() %></td>
 <td><%= product.getName() %></td>
 <td><%= product.getPrice() %></td>
-<td> <a href="/web.userpage/addcart?code=<%=product.getProd_no()%>"> 추가하기</a></td>
+<td> <a href="/web/addcart?code=<%=product.getProd_no()%>"> 추가하기</a></td>
 </tr>
 
 <%} %>
 
 </table>
 
-<div> <a href="/web.userpage/cart">장바구니</a> </div>
+<div> <a href="/web/cart">장바구니</a> </div>
 
 </body>
 </html>
