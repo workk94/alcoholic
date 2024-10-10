@@ -17,4 +17,7 @@ public class AdminService {
 	public int updateAdmin(Admin admin) {
 		return dao.update(admin);
 	}
+	public int deleteAdmin(String id) {
+		return dao.delete(id);
+	}
 }
