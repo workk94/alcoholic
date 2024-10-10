@@ -37,7 +37,8 @@ header {
     justify-content: center;
     margin-bottom: 55px;
 }
-.logo a:hover{
+
+.logo a:hover {
     text-decoration: none;
 }
 
@@ -103,6 +104,7 @@ header {
     text-decoration: underline;
     text-decoration-color: rgb(250, 220, 100);
 }
+
 .menu ul li a {
     text-decoration: none;
 }
@@ -186,13 +188,27 @@ main {
     font-weight: 500;
     padding-left: 15px;
 }
-button{
-    border : 0;
+
+button {
+    border: 0;
     background-color: transparent;
     font-weight: 500;
     font-size: 12px;
 }
-button:hover{
+
+button:hover {
     text-decoration: underline;
     cursor: pointer;
+}
+input{
+    outline: none;
+}
+#id, #name, #ssn {
+    border-bottom: none;
+}
+
+.pwcheck{
+    color : red;
+    font-size: 13px;
+    display: none;
 }
