@@ -7,8 +7,39 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form>
-
+<form class="regForm" action="${pageContext.request.contextPath}/register" method="post">
+<table>
+<tr>
+<td>아이디</td>
+<td><input type="text" name="id"></td>
+</tr>
+<tr>
+<td>패스워드</td>
+<td><input type="text" name="pw"></td>
+</tr>
+<tr>
+<td>패스워드 확인</td>
+<td><input type="text" name="pw2"></td>
+</tr>
+<tr>
+<td>이름</td>
+<td><input type="text" name="name"></td>
+</tr>
+<tr>
+<td>주민번호</td>
+<td><input type="text" name="ssn"></td>
+</tr>
+<tr>
+<td>전화번호</td>
+<td><input type="text" name="phone"></td>
+</tr>
+<tr>
+<td>주소</td>
+<td><input type="text" name="addr"></td>
+</tr>
+</table>
+<button class="checkLogin">회원가입</button>
 </form>
+<script type="text/javascript" src="js/register.js"></script>
 </body>
 </html>

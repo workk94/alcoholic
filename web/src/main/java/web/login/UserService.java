@@ -8,4 +8,8 @@ public class UserService {
 	public User userLogin(String id, String pw) {
 		return dao.findByIdAndPassword(id, pw);
 	}
+	
+	public int userReg(User user) {
+		return dao.insertUser(user);
+	}
 }
