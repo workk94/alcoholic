@@ -35,29 +35,26 @@ public class AddCartServlet extends HttpServlet{
 		
 		
 		HttpSession session = req.getSession();
-	
+		
+//		카트에 null 값이 들어가면 초기화하기 위한 remove		
 //		session.removeAttribute("cartlist");
 		
 		Object result = session.getAttribute("cartlist");
 		
 		if(result !=null) {
 			
-			System.out.println("  세션있는 경우");
-			
 			ArrayList<Product> cartlist =  (ArrayList<Product>) result;
 			cartlist.add(product);
 		} else {
-			
-			System.out.println("  세션있는  없는 경우");
 			ArrayList<Product> cartlist = new ArrayList<Product>();
 			cartlist.add(product);				
 			session.setAttribute("cartlist", cartlist);
 		}
 		
-		// 상품 정보를 세션에 저장
-      
 		
-		req.getRequestDispatcher("WEB-INF/views/cartlist.jsp").forward(req, resp);
+		resp.sendRedirect("/web/cart");
+		
+//		req.getRequestDispatcher("WEB-INF/views/cartlist.jsp").forward(req, resp);
 		
 	}
 	

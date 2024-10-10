@@ -39,7 +39,7 @@ public class ProductDAO {
 		ArrayList<Product> list = new ArrayList();
 		
 		Connection con = dbcon();
-		String sql = "select product_no, name, price from product_500";
+		String sql = "select * from producttbl";
 		
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
@@ -48,14 +48,17 @@ public class ProductDAO {
 			while(rs.next()) {
 				String prod_no = rs.getString(1);
 				String name = rs.getString(2);
-				int price = rs.getInt(3);
+				String category = rs.getString(3);
+				int price = rs.getInt(4);
+				String img = rs.getString(5);
 				
-				Product product = new Product(prod_no, name, price);
+				Product product = new Product(prod_no, name, category, price, img);
 				list.add(product);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("sql");
 		}
 		
 		return list;
@@ -65,7 +68,7 @@ public class ProductDAO {
 	public Product selectOne(String prod_no) {
 		
 		Connection con = dbcon();
-		String sql = "select product_no, name, price from product_500 where product_no=?";
+		String sql = "select * from producttbl where product_no=?";
 		
 		Product product = null;
 		try {
@@ -76,9 +79,11 @@ public class ProductDAO {
 			if(rs.next()) {
 				String p_no = rs.getString(1);
 				String name = rs.getString(2);
-				int price = rs.getInt(3);
+				String category = rs.getString(3);
+				int price = rs.getInt(4);
+				String img = rs.getString(5);
 				
-				product = new Product(p_no, name, price);
+				product = new Product(prod_no, name, category, price, img);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -93,9 +98,12 @@ public class ProductDAO {
 	public static void main(String[] args) {
 //		ProductDAO  dao = new ProductDAO();
 //		Product o = dao.selectOne("p001");
-//		
+//		ArrayList<Product> i = dao.prodList();
 //		
 //		System.out.println( o);
+//		System.out.println(i.toString());
+//		
+//		System.out.println("Size of product list: " + i.size());
 	}
 	
 }
