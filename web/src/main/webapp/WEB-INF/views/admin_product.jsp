@@ -1,3 +1,4 @@
+<%@page import="web.admin.Product"%>
 <%@page import="web.admin.Admin"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_product.css" />
 </head>
 <body>
     <!-- 헤더 부분 시작 -->
@@ -41,26 +42,26 @@
     <!-- 메인 부분 시작 -->
     <main>
         <div class="container">
-            <h1 class="title">ADMIN</h1>
+            <h1 class="title">PRODUCT</h1>
 
             <table>
                 <tr>
+                    <th class="info">No</th>
+                    <th class="info">카테고리</th>
                     <th class="info">이름</th>
-                    <th class="info">아이디</th>
-                    <th class="info">비밀번호</th>
-                    <th class="info">전화번호</th>
-                    <th class="register"><a href="#">Register +</a></th>
+                    <th class="info">가격</th>
+                    <th class="register"><a href="#">Add +</a></th>
                 </tr>
-				<%ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list"); %>
-                <%for(Admin admin : list) { %>
-                <tr class = "admin_info">
-                    <th><%=admin.getName() %></th>
-                    <th><%=admin.getId() %></th>
-                    <th><%=admin.getPw() %></th>
-                    <th><%=admin.getPhone() %></th>
-                    <th><a class="update" href="/web/admin.update?id=<%=admin.getId()%>">Update</a> / <a class="delete"
-                     href="/web/admin.delete?id=<%=admin.getId() %>" onclick = "return deleteCheck();")>Delete</a></th>
-                     
+				<%ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list"); %>
+                <%for(Product product : list) { %>
+                <tr class = "product_info">
+                    <th><%=product.getNo() %></th>
+                    <th><%=product.getCategory() %></th>
+                    <th><%=product.getName() %></th>
+                    <th><%=product.getPrice() %></th>
+                    <th><a class="update" href="/web/admin_product.update?no=<%=product.getNo()%>">Update</a> / <a class="delete"
+                     href="/web/admin_product.delete?no=<%=product.getNo() %>" onclick = "return deletecheck();")>Delete</a></th>
+                    
                 </tr>
                 <%} %>
 
@@ -71,7 +72,7 @@
         </div>
        <script type="text/javascript">
        
-       function deleteCheck(){
+       function deletecheck(){
     	          return confirm("정말 삭제하시겠습니까?");
     	   }
        
