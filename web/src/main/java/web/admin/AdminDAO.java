@@ -82,6 +82,7 @@ public class AdminDAO {
 		}
 		return list;
 	}
+	//고객 한명 정보 조회
 	public Admin selectOne(String id) {
 		Connection con = dbcon();
 		PreparedStatement pst = null;
@@ -113,7 +114,7 @@ public class AdminDAO {
 		}
 		return admin;
 	}
-	
+	//고객 정보 수정(비밀번호,전화번호,주소)
 	public int update(Admin admin) {
 		int rRow = 0;
 		Connection con = dbcon();
@@ -137,6 +138,27 @@ public class AdminDAO {
 		return rRow;
 	}
 		
+	//고객 삭제
+	int delete(String id) {
+		int rRow = 0;
+		Connection con = dbcon();
+		PreparedStatement pst = null;
+		String sql = "delete from usertbl where id = ? ";
+		
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, id);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbclose(con, pst);
+		}
+		
+		
+		return rRow;
+	}
 	
 	
 	public static void main(String[] args) {

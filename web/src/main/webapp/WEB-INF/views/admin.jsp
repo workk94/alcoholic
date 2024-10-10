@@ -58,7 +58,9 @@
                     <th><%=admin.getId() %></th>
                     <th><%=admin.getPw() %></th>
                     <th><%=admin.getPhone() %></th>
-                    <th><a class="update" href="/web/admin.update?id=<%=admin.getId()%>">Update</a> / <a class="delete" href="">Delete</a></th>
+                    <th><a class="update" href="/web/admin.update?id=<%=admin.getId()%>">Update</a> / <a class="delete"
+                     href="/web/admin.delete?id=<%=admin.getId() %>" onclick = "return deletecheck();")>Delete</a></th>
+                     
                 </tr>
                 <%} %>
 
@@ -67,6 +69,14 @@
             </table>
 
         </div>
+       <script type="text/javascript">
+       
+       function deletecheck(){
+    	          return confirm("정말 삭제하시겠습니까?");
+    	   }
+       
+       </script>
+
     </main>
     <!-- 메인 부분 끝 -->
 </body>
