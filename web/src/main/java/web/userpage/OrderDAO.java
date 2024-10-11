@@ -59,6 +59,7 @@ public class OrderDAO {
 				String quantity = rs.getString(5);
 				Date date = rs.getDate(6);
 				
+				// 수정해야하는 부분
 				Order order = new Order(user_id, name, category, price, quantity, date);
 				list.add(order);
 				
@@ -72,6 +73,15 @@ public class OrderDAO {
 		return list;
 		
 	}
+	
+		
+	
+	
+	
+	
+	
+	
+	
 	
 	public static void main(String[] args) {
 		ArrayList<Order> list = new ArrayList();
