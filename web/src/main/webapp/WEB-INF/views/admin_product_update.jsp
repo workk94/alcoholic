@@ -55,12 +55,12 @@
                         <p>No : <input id="no" name="no" type="text" value="<%=product.getNo() %>" readonly="readonly"> </p>
                         <p>이름 : <input id="name" name="name" type="text" value="<%=product.getName() %>"></p>
                         <p>가격 : <input id="price" name="price" type="text" value="<%=product.getPrice() %>"> </p>
-                        <p>imgUrl : <input id="imgUrl" name="imgUrl" type="text" value="<%=product.getImgUrl() %>"> <a><i class="fa-solid fa-arrows-rotate"></i></a></p>  
+                        <p>imgUrl : <input id="imgUrl" name="imgUrl" type="text" value="<%=product.getImgUrl() %>"> <a onclick = "imgCheck();"><i class="fa-solid fa-arrows-rotate"></i></a></p>  
                     </div>
                     <button>수정하기</button>
                 </form>
                 <div class="image">
-                    <img src="<%=product.getImgUrl() %>" alt="Product Image">
+                    <img id="productImg" src="<%=product.getImgUrl() %>">
                 </div>
             </div>
             
@@ -72,6 +72,11 @@
         function updateCheck(){
      	          return confirm("정말 수정하시겠습니까?");
      	   }
+        function imgCheck(){
+        	let imgUrl = document.querySelector("#imgUrl").value;
+
+            document.querySelector("#productImg").src = imgUrl;
+        }
         
         </script>
            
