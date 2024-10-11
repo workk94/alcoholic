@@ -1,4 +1,4 @@
-package web.pages;
+package web.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import web.pages.ProductDTO;
 
 public class ShopDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -59,6 +61,38 @@ public class ShopDAO {
 		return list;
 	}
 
+	public ArrayList<ProductDTO> selectProductByCat(String category_) {
+
+		ArrayList<ProductDTO> list = new ArrayList<>();
+
+		String sql = "SELECT * FROM PRODUCTTBL WHERE CATEGORY = ?";
+
+		try (Connection con = dbCon(); PreparedStatement pst = con.prepareStatement(sql);) {
+			pst.setString(1, category_);
+			
+			try (ResultSet rs = pst.executeQuery()){
+				while (rs.next()) {
+					String productNo = rs.getString(1);
+					String name = rs.getString(2);
+					String category = rs.getString(3);
+					int price = rs.getInt(4);
+					String imgUrl = rs.getString(5);
+
+					ProductDTO product = new ProductDTO(productNo, name, category, price, imgUrl);
+					list.add(product);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 	public ProductDTO selectProduct(String productNo) {
 		ProductDTO product = new ProductDTO();
 		String sql = "SELECT * FROM PRODUCTTBL WHERE PRODUCT_NO = ?";
@@ -68,13 +102,13 @@ public class ShopDAO {
 			pst.setString(1, productNo);
 
 			try (ResultSet rs = pst.executeQuery()) {
-				if(rs.next()) {
+				if (rs.next()) {
 					String product_no = rs.getString(1);
 					String pname = rs.getString(2);
 					String category = rs.getString(3);
 					int price = rs.getInt(4);
 					String img_url = rs.getString(5);
-					
+
 					product.setProductNo(product_no);
 					product.setPname(pname);
 					product.setCategory(category);
@@ -91,14 +125,5 @@ public class ShopDAO {
 		}
 
 		return product;
-	}
-
-	// test
-
-	public static void main(String[] args) {
-		ShopDAO dao = new ShopDAO();
-		ProductDTO p = dao.selectProduct("");
-		System.out.println(p);
-		
 	}
 }

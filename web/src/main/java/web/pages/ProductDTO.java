@@ -7,6 +7,9 @@ public class ProductDTO {
 	int price;
 	String imgUrl;
 	
+	//카트수량
+	int qty = 0;
+	
 	public ProductDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -60,10 +63,20 @@ public class ProductDTO {
 		this.imgUrl = imgUrl;
 	}
 
+	
+	// 카트 수량
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductDTO [productNo=" + productNo + ", pname=" + pname + ", category=" + category + ", price=" + price
-				+ ", imgUrl=" + imgUrl + "]";
+				+ ", imgUrl=" + imgUrl + ", qty=" + qty + "]";
 	}
 	
 }
