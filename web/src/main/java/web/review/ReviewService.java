@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ReviewService {
 
-	ReviewDAO dao = new ReviewDAO();
+ReviewDAO dao = new ReviewDAO();
 	
 //	//리뷰 전체조회 
 //	public ArrayList<Review> getReviewAll(){
@@ -16,10 +16,8 @@ public class ReviewService {
 		return dao.listPaging(1, 2);
 	}	
 	
-	
 	//리뷰상세조회
 	public Review getReview(String review_no) {
-		// 필요한 속성으로 Review 객체 생성
 		Review review = dao.selectOne(review_no);
 		return review;
 	}
@@ -35,7 +33,7 @@ public class ReviewService {
 	}
 
 	// 리뷰 삭제
-	public void deleteReview(String review_no) {
-		dao.delete(review_no);
+	int deleteReview(String review_no) {
+		return dao.delete(review_no);
 	}
 }
