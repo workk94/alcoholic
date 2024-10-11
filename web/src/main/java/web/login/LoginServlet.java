@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import web.model.User;
+import web.model.UserService;
+
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	@Override
@@ -35,10 +38,10 @@ public class LoginServlet extends HttpServlet {
 		String user_pw = req.getParameter("user_pw");
 
 		UserService service = new UserService();
-		User user = service.userLogin(user_id, user_pw);
+		User admin = service.userLogin(user_id, user_pw);
 
-		if (user != null) {
-			session.setAttribute("currentUser", user);
+		if (admin != null) {
+			session.setAttribute("currentUser", admin);
 			resp.sendRedirect(req.getContextPath() + "/main");
 		} else {
 			String msg = "로그인 실패";

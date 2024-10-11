@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web.login.*;
+import web.model.User;
+import web.model.UserService;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet{

@@ -20,7 +20,6 @@ public class Review {
 	
 	
 	public Review(String user_id, String product_no, String item_no, String contents, String rating) {
-		super();
 		this.user_id = user_id;
 		this.product_no = product_no;
 		this.item_no = item_no;
@@ -31,7 +30,6 @@ public class Review {
 
 	public Review(String review_no, String user_id, String product_no, String item_no, String contents, String rating,
 			String created_at) {
-		super();
 		this.review_no = review_no;
 		this.user_id = user_id;
 		this.product_no = product_no;

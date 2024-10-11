@@ -1,4 +1,4 @@
-package web.login;
+package web.model;
 
 public class User {
 	private String id;

@@ -3,7 +3,8 @@ package web.userpage;
 import java.sql.Date;
 
 public class Order {
-
+	
+	String order_no;
 	String user_id;
 	String name;
 	String category;
@@ -16,15 +17,21 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Order(String user_id, String name, String category, int price, String quantity, Date date) {
+	
+
+
+	public Order( String user_id, String name, String category, int price, String quantity,
+			Date order_date) {
 		super();
+		
 		this.user_id = user_id;
 		this.name = name;
 		this.category = category;
 		this.price = price;
 		this.quantity = quantity;
-		this.order_date = date;
+		this.order_date = order_date;
 	}
+
 
 	public String getUser_id() {
 		return user_id;
@@ -74,11 +81,16 @@ public class Order {
 		this.order_date = order_date;
 	}
 
+
+
+
 	@Override
 	public String toString() {
-		return "Order [user_id=" + user_id + ", name=" + name + ", category=" + category + ", price=" + price
-				+ ", quantity=" + quantity + ", order_date=" + order_date + "]";
+		return "Order [order_no=" + order_no + ", user_id=" + user_id + ", name=" + name + ", category=" + category
+				+ ", price=" + price + ", quantity=" + quantity + ", order_date=" + order_date + "]";
 	}
+
+	
 	
 	
 	
