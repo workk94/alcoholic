@@ -1,4 +1,4 @@
-package web.login;
+package web.model;
 
 import java.sql.*;
 import java.util.ArrayList;
