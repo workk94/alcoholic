@@ -208,7 +208,7 @@ form {
 button {
     position: absolute; /* 절대 위치 지정 */
     bottom: 20px; /* 하단에 고정 */
-    left: 100px; /* 버튼을 가로 중앙에 배치 */
+    left: 80px;
     transform: translateX(-50%); /* 가로 중앙으로 정렬 */
     border: 0;
     background-color: transparent;

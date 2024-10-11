@@ -25,7 +25,7 @@
                         <ul>
                             <li><a href="/web/admin">ADMIN</a></li>
                             <li><a href="/web/admin_product">PRODUCT</a></li>
-                            <li><a href="/web/admin_sales">SALES</a></li>
+                            <li><a href="/web/admin_sales">ORDER</a></li>
                         </ul>
                 </ul>
             </div>
@@ -50,7 +50,7 @@
                     <th class="info">카테고리</th>
                     <th class="info">이름</th>
                     <th class="info">가격</th>
-                    <th class="register"><a href="#">Add +</a></th>
+                    <th class="add"><a href="/web/admin_product.add">Add +</a></th>
                 </tr>
 				<%ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list"); %>
                 <%for(Product product : list) { %>

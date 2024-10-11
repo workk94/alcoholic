@@ -15,4 +15,11 @@ public class ProductService {
 	public int updateProduct(Product product) {
 		return dao.update(product);
 	}
+	public int deleteProduct(String no) {
+		return dao.delete(no);
+	}
+	public int addProduct(Product product) {
+		return dao.insert(product);
+	}
+	
 }

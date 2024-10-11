@@ -2,6 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,7 @@
                         <ul>
                             <li><a href="/web/admin">ADMIN</a></li>
                             <li><a href="/web/admin_product">PRODUCT</a></li>
-                            <li><a href="/web/admin_sales">SALES</a></li>
+                            <li><a href="/web/admin_sales">ORDER</a></li>
                         </ul>
                 </ul>
             </div>
@@ -39,6 +40,8 @@
 
 
     <!-- 메인 부분 시작 -->
+    <c:if test="${!empty sessionScope.currentUser}">
+    
     <main>
         <div class="container">
             <h1 class="title">ADMIN</h1>
@@ -78,6 +81,10 @@
        </script>
 
     </main>
+    
+    
+    
+    </c:if>
     <!-- 메인 부분 끝 -->
 </body>
 </html>
