@@ -34,7 +34,7 @@ td {
 <td>날짜</td>
 </tr>
 
-<% ArrayList<Order> list = (ArrayList<Order>) request.getAttribute("list"); %>
+<% ArrayList<Order> list = (ArrayList<Order>) request.getAttribute("cartlist"); %>
 
 <% for(Order order : list){ %>
 <tr>
@@ -48,7 +48,7 @@ td {
 
 <% 
 int result = 0;
-result += order.getPrice();
+result += order.getPrice() * Integer.parseInt(order.getQuantity());
 %>
 
 <tr>

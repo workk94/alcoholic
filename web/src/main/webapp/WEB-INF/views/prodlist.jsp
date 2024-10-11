@@ -12,6 +12,7 @@
 
 <table>
 <tr>
+<td>이미지</td>
 <td>코드</td>
 <td>이름</td>
 <td>가격</td>
@@ -22,12 +23,12 @@
 <% for( Product product : list){ %>
 
 <tr>
+<td><%= product.getImg_url() %></td>
 <td><%= product.getProd_no() %></td>
 <td><%= product.getName() %></td>
 <td><%= product.getPrice() %></td>
 <td> <a href="/web/addcart?code=<%=product.getProd_no()%>"> 추가하기</a></td>
 </tr>
-
 <%} %>
 
 </table>
