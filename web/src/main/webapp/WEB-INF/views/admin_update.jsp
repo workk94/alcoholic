@@ -29,7 +29,7 @@
                         <ul>
                             <li><a href="admin.html">ADMIN</a></li>
                             <li><a href="#">ITEM</a></li>
-                            <li><a href="#">SALES</a></li>
+                            <li><a href="#">ORDER</a></li>
                         </ul>
                 </ul>
             </div>

@@ -29,7 +29,7 @@
                                 <ul>
                                     <li><a href="/web/admin">ADMIN</a></li>
                                     <li><a href="/web/admin_product">PRODUCT</a></li>
-                                    <li><a href="/web/admin_sales">SALES</a></li>
+                                    <li><a href="/web/admin_sales">ORDER</a></li>
                                 </ul>
                         </ul>
                     </div>
