@@ -9,4 +9,7 @@ public class OrderService {
 	public ArrayList<Order> getOrderList(){
 		return dao.selectAll();
 	}
+	public ArrayList<Order> getOrderDetail(String no){
+		return dao.selectOne(no);
+	}
 }

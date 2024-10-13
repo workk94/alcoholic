@@ -1,5 +1,4 @@
-<%@page import="web.admin.Product"%>
-<%@page import="web.admin.Admin"%>
+<%@page import="web.admin.Order"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_product.css" />
+<link rel="stylesheet" href="css/order.css" />
 </head>
 <body>
     <!-- 헤더 부분 시작 -->
@@ -42,42 +41,37 @@
     <!-- 메인 부분 시작 -->
     <main>
         <div class="container">
-            <h1 class="title">PRODUCT</h1>
+            <h1 class="title">ORDER</h1>
 
             <table>
                 <tr>
                     <th class="info">No</th>
-                    <th class="info">카테고리</th>
-                    <th class="info">이름</th>
-                    <th class="info">가격</th>
-                    <th class="add"><a href="/web/admin_product.add">Add +</a></th>
+                    <th class="info">주문일자</th>
+                    <th class="info">주문ID</th>
+                    <th class="info">주문금액</th>
+                    <th class="info">주문수량</th>
+                    <th class="register"><a href=""></a></th>
                 </tr>
-				<%ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list"); %>
-                <%for(Product product : list) { %>
-                <tr class = "product_info">
-                    <th><%=product.getNo() %></th>
-                    <th><%=product.getCategory() %></th>
-                    <th><%=product.getName() %></th>
-                    <th><%=product.getPrice() %></th>
-                    <th><a class="update" href="/web/admin_product.update?no=<%=product.getNo()%>">Update</a> / <a class="delete"
-                     href="/web/admin_product.delete?no=<%=product.getNo() %>" onclick = "return deletecheck();")>Delete</a></th>
-                    
+				
+				<%ArrayList<Order> list = (ArrayList<Order>)request.getAttribute("list"); %>
+				
+                <!-- 고객 추가 반복 부분 -->
+                <%for (Order order : list) {%>
+                <tr class="order_info">
+                    <th><%=order.getOrderNo() %></th>
+                    <th><%=order.getOrderDate() %></th>
+                    <th><%=order.getUserId() %></th>
+                    <th><%=order.getPrice() %></th>
+                    <th><%=order.getQuantity() %></th>
+                    <th><a class="detail" href="/web/admin_order.detail?no=<%=order.getOrderNo() %>">상세보기</a></th>
                 </tr>
-                <%} %>
+                 <%} %>
+                <!-- 고객 추가 반복 부분 -->
 
-
-                
             </table>
 
         </div>
-       <script type="text/javascript">
-       
-       function deletecheck(){
-    	          return confirm("정말 삭제하시겠습니까?");
-    	   }
-       
-       </script>
-
+        
     </main>
     <!-- 메인 부분 끝 -->
 </body>
