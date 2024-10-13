@@ -67,7 +67,7 @@ public class OrderDAO {
 				int quantity = rs.getInt(5);
 				
 
-				Order order = new Order(orderNo, userId, orderDate, null, null, null, null, price, quantity);
+				Order order = new Order(orderNo, userId, orderDate, null, null, null, null, price, quantity,null);
 
 				list.add(order);
 			}
@@ -81,9 +81,54 @@ public class OrderDAO {
 		return list;
 	}
 	
+	//상세 내역 출력 
+		public ArrayList<Order> selectOne(String no) {
+			Connection con = null;
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+			ArrayList<Order> list = new ArrayList<>();
+
+			con = dbcon();
+			try {
+
+				String sql = "SELECT o.order_no, o.user_id, o.order_date, oi.item_no, oi.product_no, p.name AS product_name, p.category, p.price, oi.quantity,p.img_url FROM ordertbl o JOIN order_itemtbl oi ON o.order_no = oi.order_no JOIN producttbl p ON oi.product_no = p.product_no WHERE o.ORDER_NO = ? ORDER BY o.order_date, oi.item_no";
+
+				pst = con.prepareStatement(sql);
+				// ?에 들어갈 값 채우기
+				pst.setString(1, no);
+				rs = pst.executeQuery();
+
+				while (rs.next()) {
+					String orderNo = rs.getString(1);
+					String orderDate = rs.getString(3);
+					String userId = rs.getString(2);
+					String itemNo = rs.getString(4);
+					String productNo = rs.getString(5);
+					String productName = rs.getString(6);
+					String category = rs.getString(7);
+					int price = rs.getInt(8);
+					int quantity = rs.getInt(9);
+					String imgUrl = rs.getString(10);
+					
+
+			Order order = new Order(orderNo, userId, orderDate, itemNo, productNo, productName,
+							category, price, quantity,imgUrl);
+
+					list.add(order);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				dbclose(con, pst, rs);
+			}
+			return list;
+		}
+	
 	public static void main(String[] args) {
 		OrderDAO dao = new OrderDAO();
-		ArrayList<Order> order = dao.selectAll();
+		ArrayList<Order> order = dao.selectOne("ORD001");
 		System.out.println(order);
 				
 	}

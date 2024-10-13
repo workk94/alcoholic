@@ -27,9 +27,9 @@
                     <li>
                         <a class="main_menu" href="">SYSTEM</a>
                         <ul>
-                            <li><a href="admin.html">ADMIN</a></li>
-                            <li><a href="#">ITEM</a></li>
-                            <li><a href="#">ORDER</a></li>
+                            <li><a href="/web/admin">ADMIN</a></li>
+                                    <li><a href="/web/admin_product">PRODUCT</a></li>
+                                    <li><a href="/web/admin_order">ORDER</a></li>
                         </ul>
                 </ul>
             </div>
