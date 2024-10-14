@@ -7,9 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 public class ProductDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:ORCLCDB";
+	String url = "jdbc:oracle:thin:@localhost:1521:testdb";
 	String user = "scott";
 	String password = "tiger";
 
@@ -82,7 +83,7 @@ public class ProductDAO {
 		}
 		return list;
 	}
-	//고객 한명 정보 조회
+	//상품 정보 조회
 	public Product selectOne(String no) {
 		Connection con = dbcon();
 		PreparedStatement pst = null;
@@ -137,28 +138,51 @@ public class ProductDAO {
 		
 		return rRow;
 	}
-//		
-//	//고객 삭제
-//	int delete(String id) {
-//		int rRow = 0;
-//		Connection con = dbcon();
-//		PreparedStatement pst = null;
-//		String sql = "delete from usertbl where id = ? ";
-//		
-//		try {
-//			pst = con.prepareStatement(sql);
-//			pst.setString(1, id);
-//			pst.executeUpdate();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally {
-//			dbclose(con, pst);
-//		}
-//		
-//		
-//		return rRow;
-//	}
+		
+	//상품 삭제
+	int delete(String no) {
+		int rRow = 0;
+		Connection con = dbcon();
+		PreparedStatement pst = null;
+		String sql = "delete from producttbl where product_no = ? ";
+		
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, no);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbclose(con, pst);
+		}
+		
+		
+		return rRow;
+	}
+	//상품 추가
+	public int insert(Product product) {
+		int rRow = 0;
+		Connection con = dbcon();
+		PreparedStatement pst = null;
+		String sql = "insert into producttbl values(no_seq.NEXTVAL,?,?,?,?)";
+		
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, product.getName());
+			pst.setString(2, product.getCategory());
+			pst.setInt(3, product.getPrice());
+			pst.setString(4, product.getImgUrl());
+			rRow = pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbclose(con, pst);
+		}
+		
+		return rRow;
+	}
 	
 	public static void main(String[] args) {
 		ProductDAO dao = new ProductDAO();

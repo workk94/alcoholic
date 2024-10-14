@@ -1,6 +1,7 @@
 package web.userpage;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -16,14 +17,15 @@ public class OrderServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		ArrayList<Order> list = new ArrayList();
+		ArrayList<Order> cartlist = new ArrayList();
 		OrderDAO dao = new OrderDAO();
-		list = dao.getOrderList();
+		cartlist = dao.getOrderList();
 		
-		req.setAttribute("list", list);
+		req.setAttribute("cartlist", cartlist);
 		
 		
 		req.getRequestDispatcher("WEB-INF/views/orderlist.jsp").forward(req, resp);
+		
 		
 	}
 	

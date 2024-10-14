@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.model.ShopService;
+
 
 
 @WebServlet("/main")
 public class MainServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ShopDAO dao  = new ShopDAO();
+		ShopService service  = new ShopService();
 		
-		ArrayList<ProductDTO> productList = dao.selectAllProduct();
+		ArrayList<ProductDTO> productList = service.getAllProduct();
 		
 		req.setAttribute("productList", productList);
-		
 		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp);
-		
 		
 	}
 }

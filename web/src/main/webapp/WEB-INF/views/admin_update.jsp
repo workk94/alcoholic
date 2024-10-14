@@ -15,32 +15,9 @@
 
 
 <body>
-    <!-- 헤더 부분 시작 -->
-    <header>
-        <div class="top">
-            <div class="logo">
-                <a href="">SYSTEM</a>
-            </div>
-
-            <div class="menu">
-                <ul>
-                    <li>
-                        <a class="main_menu" href="">SYSTEM</a>
-                        <ul>
-                            <li><a href="admin.html">ADMIN</a></li>
-                            <li><a href="#">ITEM</a></li>
-                            <li><a href="#">SALES</a></li>
-                        </ul>
-                </ul>
-            </div>
-        </div>
-        <!-- 우측 상단 로그인&회원가입 -->
-        <div class="login">
-            <p>system 님 , 안녕하세요.</p>
-            <a class="log_btn" href="login.html">LOGIN(LOGOUT)</a> / <a class="join_btn" href="joinus.html">JOIN US</a>
-        </div>
-    </header>
-    <!-- 헤더 부분  -->
+   <!-- 헤더 부분 시작 -->
+    <jsp:include page="../componants/admin_header.jsp" />
+    <!-- 헤더 부분  끝-->
 
 	
     <!-- 메인 부분 시작 -->

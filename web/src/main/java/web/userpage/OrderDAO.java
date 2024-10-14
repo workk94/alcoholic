@@ -59,6 +59,7 @@ public class OrderDAO {
 				String quantity = rs.getString(5);
 				Date date = rs.getDate(6);
 				
+				// 수정해야하는 부분
 				Order order = new Order(user_id, name, category, price, quantity, date);
 				list.add(order);
 				
@@ -72,6 +73,24 @@ public class OrderDAO {
 		return list;
 		
 	}
+	
+	public int InsertOrder(String user_id) {
+		
+		Connection con = dbcon();
+		String sql = "insert into ordertbl (order_no, user_id, order_date) values (?,?,?)";
+		
+		
+		return 0;
+	}
+	
+		
+	
+	
+	
+	
+	
+	
+	
 	
 	public static void main(String[] args) {
 		ArrayList<Order> list = new ArrayList();

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-cart
+검색
 </body>
 </html>

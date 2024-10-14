@@ -20,4 +20,10 @@ public class AdminService {
 	public int deleteAdmin(String id) {
 		return dao.delete(id);
 	}
+	public ArrayList<Admin> getPage(int currentPage, int pageSize){
+		return dao.selectListPaging(currentPage, pageSize);
+	}
+	public int getTotalCnt() {
+		return dao.selectTotalCnt();
+	}
 }

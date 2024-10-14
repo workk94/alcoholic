@@ -1,7 +1,9 @@
+<%@page import="web.admin.PageHandler"%>
 <%@page import="web.admin.Admin"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,34 +13,13 @@
 </head>
 <body>
     <!-- 헤더 부분 시작 -->
-    <header>
-        <div class="top">
-            <div class="logo">
-                <a href="">SYSTEM</a>
-            </div>
-
-            <div class="menu">
-                <ul>
-                    <li>
-                        <a class="main_menu" href="">SYSTEM</a>
-                        <ul>
-                            <li><a href="/web/admin">ADMIN</a></li>
-                            <li><a href="/web/admin_product">PRODUCT</a></li>
-                            <li><a href="/web/admin_sales">SALES</a></li>
-                        </ul>
-                </ul>
-            </div>
-        </div>
-        <!-- 우측 상단 로그인&회원가입 -->
-        <div class="login">
-            <p>system 님 , 안녕하세요.</p>
-            <a class="log_btn">LOGIN(LOGOUT)</a>
-        </div>
-    </header>
+    <jsp:include page="../componants/admin_header.jsp" />
     <!-- 헤더 부분  끝-->
 
 
     <!-- 메인 부분 시작 -->
+    <%-- <c:if test="${!empty sessionScope.currentUser}"> --%>
+    
     <main>
         <div class="container">
             <h1 class="title">ADMIN</h1>
@@ -63,11 +44,36 @@
                      
                 </tr>
                 <%} %>
-
-
-                
             </table>
+			<br>
+			
+			<div class = "page"><%PageHandler handler = (PageHandler)request.getAttribute("handler"); %>
+		
+			<!-- 이전 -->
+		
+			<%if(handler.getCurrentGrp() > 1){ %>
+			[<a href="/web/admin?p=<%=handler.getGrpStartPage()-1 %> "> 이전 </a> ]
+			
+			<%} %>
+		
+		
+			<%for (int i = handler.getGrpStartPage(); i <= handler.getGrpEndPage(); i++) { %>
+		    <% if (i == handler.getCurrentPage()) { %>
+		        [<a href="/web/admin?p=<%= i %>" class = "current"> <%= i %> </a>]
+		    <% } else { %>
+		        [<a href="/web/admin?p=<%= i %>"> <%= i %> </a>]
+		    	<% } %>
+			<% } %>
 
+			
+			
+		
+			<!-- 다음 -->
+		
+			<% if(handler.getTotalPage() > handler.getGrpEndPage()){ %>
+				[<a href="/web/admin?p=<%=handler.getGrpEndPage()+1 %>">다음</a> ]
+			<%} %>
+			</div>
         </div>
        <script type="text/javascript">
        
@@ -78,6 +84,10 @@
        </script>
 
     </main>
+    
+    
+    
+    <%-- </c:if> --%>
     <!-- 메인 부분 끝 -->
 </body>
 </html>

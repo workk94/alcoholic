@@ -5,55 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-
-.container {
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-.new-post {
-    text-align: right;
-    margin: 20px 0;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="/web/css/review.css">
 </head>
 <body>
-<div class="container">
-<h1>새 리뷰 작성</h1>
+<!-- 헤더 부분 시작 -->
+<header>
+<jsp:include page="../componants/header.jsp"></jsp:include>
+</header>
+<!-- 헤더 부분  끝-->
+    
+<!-- 메인 부분 시작 -->
+<main>
+        <div class="container">
+            <h1 class="title">새 리뷰 작성</h1>
 <form name="form" action="/web/addReview" method="post" onsubmit="return signUpCheck()">
     <table>
-        <tr>
+        <tr >
             <td><label for="user_id">작성자:</label></td>
             <td><input type="text" name="user_id" required></td>
         </tr>
@@ -78,10 +45,9 @@ th {
         </tr>
     </table>
 </form>
- <div class="new-post">
- <a href="review">목록으로 돌아가기</a>
-</div>
+ <div class="new_wrap"><a class="new" href="review">목록으로 돌아가기</a></div>
 
 </div>
+</main>
 </body>
 </html>
