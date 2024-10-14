@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ProductDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:ORCLCDB";
+	String url = "jdbc:oracle:thin:@localhost:1521:testdb";
 	String user = "scott";
 	String password = "tiger";
 

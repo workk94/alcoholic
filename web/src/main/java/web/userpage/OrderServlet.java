@@ -26,7 +26,6 @@ public class OrderServlet extends HttpServlet{
 		
 		req.getRequestDispatcher("WEB-INF/views/orderlist.jsp").forward(req, resp);
 		
-		resp.sendRedirect("/deletecart");
 		
 	}
 	
