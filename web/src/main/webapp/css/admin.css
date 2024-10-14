@@ -5,9 +5,6 @@ body {
     background-color: rgba(252, 245, 223, 0.95);
 }
 
-
-
-
 /* 메인 부분 시작 */
 main {
     min-height: 315px;
@@ -66,4 +63,11 @@ th:nth-child(5) {
 .update,
 .delete {
     font-weight: 500;
+}
+
+.page{
+	text-align: center;
+}
+.current{
+    color: threedface;
 }

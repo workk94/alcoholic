@@ -1,3 +1,4 @@
+<%@page import="web.admin.PageHandler"%>
 <%@page import="web.admin.Admin"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,7 +18,7 @@
 
 
     <!-- 메인 부분 시작 -->
-    <c:if test="${!empty sessionScope.currentUser}">
+    <%-- <c:if test="${!empty sessionScope.currentUser}"> --%>
     
     <main>
         <div class="container">
@@ -43,11 +44,36 @@
                      
                 </tr>
                 <%} %>
-
-
-                
             </table>
+			<br>
+			
+			<div class = "page"><%PageHandler handler = (PageHandler)request.getAttribute("handler"); %>
+		
+			<!-- 이전 -->
+		
+			<%if(handler.getCurrentGrp() > 1){ %>
+			[<a href="/web/admin?p=<%=handler.getGrpStartPage()-1 %> "> 이전 </a> ]
+			
+			<%} %>
+		
+		
+			<%for (int i = handler.getGrpStartPage(); i <= handler.getGrpEndPage(); i++) { %>
+		    <% if (i == handler.getCurrentPage()) { %>
+		        [<a href="/web/admin?p=<%= i %>" class = "current"> <%= i %> </a>]
+		    <% } else { %>
+		        [<a href="/web/admin?p=<%= i %>"> <%= i %> </a>]
+		    	<% } %>
+			<% } %>
 
+			
+			
+		
+			<!-- 다음 -->
+		
+			<% if(handler.getTotalPage() > handler.getGrpEndPage()){ %>
+				[<a href="/web/admin?p=<%=handler.getGrpEndPage()+1 %>">다음</a> ]
+			<%} %>
+			</div>
         </div>
        <script type="text/javascript">
        
@@ -61,7 +87,7 @@
     
     
     
-    </c:if>
+    <%-- </c:if> --%>
     <!-- 메인 부분 끝 -->
 </body>
 </html>

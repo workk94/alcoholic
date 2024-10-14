@@ -19,15 +19,15 @@
 
 	<!-- 메인 부분 시작 -->
 	<main>
-        <div class="container">
-            <h1 class="title">SALES</h1>
+		<div class="container">
+			<h1 class="title">SALES</h1>
 
-            <div class="chart_wrap">
-                    <canvas id="myChart"></canvas>
-                    <canvas id="myChart2"></canvas>
-                    <canvas id="myChart3"></canvas>
-            </div>
-        </div>
+			<div class="chart_wrap">
+				<canvas id="myChart"></canvas>
+				<canvas id="myChart2"></canvas>
+				<canvas id="myChart3"></canvas>
+			</div>
+		</div>
 
 		<%
 		ArrayList<Sales> dailySales = (ArrayList<Sales>) request.getAttribute("dailySales");
@@ -91,10 +91,9 @@
 		if (categorySales.length() > 0)
 			categorySales.setLength(categorySales.length() - 1);
 		%>
-		
+
 		<script>
-		
-		
+		Chart.defaults.font.family ="'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif";
 			const ctx = document.getElementById('myChart').getContext('2d');
 			new Chart(ctx, {
 				type : 'bar',
@@ -223,37 +222,37 @@
 				}
 			});
 			const ctx3 = document.getElementById('myChart3').getContext('2d');
-		    new Chart(ctx3, {
-		        type: 'pie',
-		        data: {
-		            labels: [<%= categoryNames.toString() %>], // 카테고리 이름
-		            datasets: [{
-		                label: 'Sales by Category',
-		                data: [<%= categorySales.toString() %>], // 카테고리별 판매 금액
-		                backgroundColor: [
-		                    'rgb(255, 99, 132)',
-		                    'rgb(54, 162, 235)',
-		                    'rgb(255, 205, 86)',
-		                    'rgb(75, 192, 192)',
-		                    'rgb(153, 102, 255)',
-		                    'rgb(255, 159, 64)'
-		                ],
-		                hoverOffset: 4
-		            }]
-		        },
-		        options: {
-		            responsive: false,
-		            maintainAspectRatio: false,
-		            plugins: {
-		                title: {
-		                    display: true,
-		                    text: 'Sales by Category'
-		                }
-		            }
-		        }
-		    });
-		    
-		    showChart(currentPage);
+			new Chart(ctx3, {
+				type : 'pie',
+				data : {
+					labels : [
+		<%=categoryNames.toString()%>
+			], // 카테고리 이름
+					datasets : [ {
+						label : 'Sales by Category',
+						data : [
+		<%=categorySales.toString()%>
+			], // 카테고리별 판매 금액
+						backgroundColor : [ 'rgb(255, 99, 132)',
+								'rgb(54, 162, 235)', 'rgb(255, 205, 86)',
+								'rgb(75, 192, 192)', 'rgb(153, 102, 255)',
+								'rgb(255, 159, 64)' ],
+						hoverOffset : 4
+					} ]
+				},
+				options : {
+					responsive : false,
+					maintainAspectRatio : false,
+					plugins : {
+						title : {
+							display : true,
+							text : 'Sales by Category'
+						}
+					}
+				}
+			});
+
+			showChart(currentPage);
 		</script>
 	</main>
 	<!-- 메인 부분 끝 -->
