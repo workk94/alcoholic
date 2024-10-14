@@ -20,7 +20,7 @@ public class AddReviewServlet extends HttpServlet{
 	        resp.setContentType("text/html;charset=utf-8");
 
 	        // 세션에서 로그인 상태 확인
-	        HttpSession session = req.getSession(false); // 새로운 세션을 만들지 않음
+	        HttpSession session = (HttpSession) req.getAttribute("currentUser");
 	        //세션이 존재할 경우 로그인 한 사용자의 id 를 가져오기
 	        String id = (session != null) ? (String) session.getAttribute("id") : null;
 
