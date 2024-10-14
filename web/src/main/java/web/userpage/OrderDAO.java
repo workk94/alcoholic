@@ -1,5 +1,6 @@
 package web.userpage;
 
+import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -74,13 +75,103 @@ public class OrderDAO {
 		
 	}
 	
-	public int InsertOrder(String user_id) {
+	public int InsertOrder(String user_id, int orderSeq ) {
+		
+		//int  orderSeq  = selectseqenceNo();
+		
 		
 		Connection con = dbcon();
+		
+		
+		
+		
+		
+		
 		String sql = "insert into ordertbl (order_no, user_id, order_date) values (?,?,?)";
+		int result=0;
+		
+		try {
+			Timestamp orderDate = new Timestamp(System.currentTimeMillis());
+	        
+	        PreparedStatement pst = con.prepareStatement(sql);
+	        pst.setInt(1, orderSeq );
+	        pst.setString(2, user_id);
+	        pst.setTimestamp(3, orderDate); // 현재 시점을 설정
+	        
+	        result = pst.executeUpdate();
+	        if(result !=0) {
+	        	System.out.println(result);
+	        	return result;
+	        }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		return 0;
+	}
+	
+	
+public int selectseqenceNo( ) {
+		
+		Connection con = dbcon();
+		 
+		
+		
+		String sql =  " select  order_seq.nextval from dual";
+		int orderSeq=0;
+		
+		try {
+		 
+	        PreparedStatement pst = con.prepareStatement(sql);
+	      
+	        ResultSet  rs  = pst.executeQuery();;
+	        if(rs.next()) {
+	        	
+	        	orderSeq  =rs.getInt(1);
+	         
+	        }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return orderSeq;
+	}
+
+
+
+
+	public int insertOrderItem(int order_no, String product_no, int quantity) {
+		
+		Connection con = dbcon();
+		String sql = "insert into order_itemtbl (item_no, order_no, product_no, quantity) values(order_item_seq.nextval,?,?,?)";
+		
+		int result=0;
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setInt(1, order_no);
+			pst.setString(2, product_no);
+			pst.setInt(3, quantity);
+			
+			result = pst.executeUpdate();
+			if(result !=0) {
+				
+//				System.out.println(result);
+				return result;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+		
 	}
 	
 		
@@ -98,6 +189,9 @@ public class OrderDAO {
 		list = dao.getOrderList();
 		
 		System.out.println(list);
+		
+		 
+		
 		
 	}
 	

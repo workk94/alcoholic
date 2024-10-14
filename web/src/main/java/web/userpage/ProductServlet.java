@@ -17,7 +17,7 @@ public class ProductServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 				
 		ProductDAO dao = new ProductDAO();
-		ArrayList<Product> list = new ArrayList();
+		ArrayList<Product> list = new ArrayList<>();
 		
 		list = dao.prodList();
 		
