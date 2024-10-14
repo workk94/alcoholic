@@ -139,7 +139,7 @@
                      <li>
                         <a class="main_menu" href="">MYPAGE</a>
                         <ul>
-                            <li><a href="${pageContext.request.contextPath}/mymain">MY PAGE</a></li>
+                            <li><a href="${pageContext.request.contextPath}/mypagemain">MY PAGE</a></li>
                             <li><a href="${pageContext.request.contextPath}/cart">CART</a></li>
                             <li><a href="${pageContext.request.contextPath}/order">ORDER</a></li>
                         </ul>

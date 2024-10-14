@@ -8,15 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>로그인</title>
+<link rel="stylesheet" type="text/css" href="/web/css/review.css">
 <style>
-body {
-	margin: 0;
-	padding: 0;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-		sans-serif;
-	background-color: rgba(252, 245, 223, 0.95);
-}
-
 header {
 	height: 160px;
 	background-color: rgba(252, 245, 223, 0.95);
@@ -188,6 +181,7 @@ main {
 </head>
 
 <body>
+	<!-- 헤더 부분 -->
 	<jsp:include page="../componants/header.jsp"></jsp:include>
 
 	<!-- 메인 부분 -->
@@ -205,8 +199,8 @@ main {
 					</p>
 					<button id="loginBtn">로그인</button>
 				</form>
-					<a href="${pageContext.request.contextPath}/register">회원가입</a> / 
-					<a href="${pageContext.request.contextPath}/adminlogin">관리자 로그인</a>
+				<a href="${pageContext.request.contextPath}/register">회원가입</a> / <a
+					href="${pageContext.request.contextPath}/adminlogin">관리자 로그인</a>
 			</div>
 		</div>
 	</main>
