@@ -80,6 +80,25 @@ public class UserDAO {
 	    return user;
 	}
 	
+	// MyPageDAO에서 update매서드 추가
+    public void update(User user) {
+        Connection con = null;
+        PreparedStatement pst = null;
+
+        String sql = "UPDATE usertbl SET password=?, phone=?, address=? WHERE id=?";
+        try {
+            con = dbCon();
+            pst = con.prepareStatement(sql);
+            pst.setString(1, user.getPw());
+            pst.setString(2, user.getPhone());
+            pst.setString(3, user.getAddr());
+            pst.setString(4, user.getId());
+            pst.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	
 	// db에 값이 정상적으로 등록되면 1, 아니면 -1을 반환
 	public int insertUser(User user) {		
