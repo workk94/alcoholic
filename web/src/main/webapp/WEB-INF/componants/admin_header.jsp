@@ -18,6 +18,7 @@
                             <li><a href="/web/admin">ADMIN</a></li>
                                     <li><a href="/web/admin_product">PRODUCT</a></li>
                                     <li><a href="/web/admin_order">ORDER</a></li>
+                                    <li><a href="/web/admin_sales">SALES</a></li>
                         </ul>
                 </ul>
             </div>
