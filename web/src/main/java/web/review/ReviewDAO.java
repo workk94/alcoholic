@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import web.model.User;
+
 public class ReviewDAO {
 
 	// DB 연결 정보
@@ -62,8 +64,11 @@ public class ReviewDAO {
 				String contents = rs.getString(5);
 				String rating = rs.getString(6);
 				String created_at = rs.getString(7);
+				 // User 객체 생성 및 초기화
+	            User user = new User();
+	            user.setId(user_id); // 사용자 ID 설정
 				
-				Review review = new Review(review_no, user_id, product_no ,item_no,contents,rating, created_at);
+				Review review = new Review(review_no, user, product_no ,item_no,contents,rating, created_at);
 				list.add(review);
 			}
 		} catch (SQLException e) {
@@ -127,7 +132,10 @@ public class ReviewDAO {
 				String rating = rs.getString("rating");
 				String created_at = rs.getString("created_at");
 				
-				review = new Review(review_no1, user_id,  product_no, item_no, contents, rating, created_at);
+				 // User 객체 생성 및 초기화
+	            User user = new User();
+	            user.setId(user_id); // 사용자 ID 설정
+				review = new Review(review_no1, user,  product_no, item_no, contents, rating, created_at);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -324,7 +332,10 @@ public class ReviewDAO {
 	               String rating = rs.getString("rating");
 	               String created_at = rs.getString("created_at");
 
-	               Review review = new Review(review_no, user_id, product_no, item_no, contents, rating, created_at);
+	               // User 객체 생성 및 초기화
+	               User user = new User();
+	               user.setId(user_id); // 사용자 ID 설정
+	               Review review = new Review(review_no, user, product_no, item_no, contents, rating, created_at);
 	               reviews.add(review);
 	           }
 	       } catch (SQLException e) {

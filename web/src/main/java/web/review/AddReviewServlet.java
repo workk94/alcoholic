@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import web.model.User;
 @WebServlet("/addReview")
 public class AddReviewServlet extends HttpServlet{
 
@@ -20,11 +22,11 @@ public class AddReviewServlet extends HttpServlet{
 	        resp.setContentType("text/html;charset=utf-8");
 
 	        // 세션에서 로그인 상태 확인
-	        HttpSession session = (HttpSession) req.getAttribute("currentUser");
+	        HttpSession session = req.getSession(false); // 기존 세션 가져오기
 	        //세션이 존재할 경우 로그인 한 사용자의 id 를 가져오기
-	        String id = (session != null) ? (String) session.getAttribute("id") : null;
+	        User currentUser  = (session != null) ? (User) session.getAttribute("currentUser") : null;
 
-	        if (id != null) {
+	        if (currentUser != null) {
 	            // 회원인 경우, 새 글 작성 페이지로 이동
 	            req.getRequestDispatcher("WEB-INF/views/reviewAdd.jsp").forward(req, resp);
 	        } else {
@@ -39,21 +41,30 @@ public class AddReviewServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		 // 세션에서 사용자 ID 가져오기
+        HttpSession session = req.getSession(false);
+        User currentUser = (session != null) ? (User) session.getAttribute("currentUser") : null;
 
-		String user_id = req.getParameter("user_id");
-		String product_no = req.getParameter("product_no");
-		String item_no = req.getParameter("item_no");
-		String contents = req.getParameter("contents");
-		String rating = req.getParameter("rating");
-	    
-	   Review r = new Review(user_id,product_no,item_no,contents,rating);
+        if (currentUser != null) {
+            // 리뷰 데이터 가져오기
+            String productNo = req.getParameter("product_no");
+            String itemNo = req.getParameter("item_no");
+            String contents = req.getParameter("contents");
+            String rating = req.getParameter("rating");
 
-	   ReviewService service = new ReviewService();
-	   service.addReview(r);
-	   
-	   
-	   resp.sendRedirect("/web/review?p=1");
-	
-	}
-	
+            // Review 객체 생성
+            Review review = new Review(currentUser, productNo, itemNo, contents, rating);
+
+            // 리뷰 추가 서비스 호출
+            ReviewService service = new ReviewService();
+            service.addReview(review);
+
+            // 리뷰 목록 페이지로 리다이렉트
+            resp.sendRedirect("/web/review?p=1");
+        } else {
+            // 로그인하지 않은 경우
+            String message = URLEncoder.encode("로그인이 필요합니다.", "UTF-8");
+            resp.sendRedirect("/web/review?message=" + message);
+        }
+    }
 }

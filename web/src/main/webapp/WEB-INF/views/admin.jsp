@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- 헤더 부분 시작 -->
-    <jsp:include page="../componants/admin_header.jsp" />
+    <jsp:include page="../componants/admin_header.jsp" /s>
     <!-- 헤더 부분  끝-->
 
 
