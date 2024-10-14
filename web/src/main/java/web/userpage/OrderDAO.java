@@ -74,6 +74,15 @@ public class OrderDAO {
 		
 	}
 	
+//	public int InsertOrder(String user_id) {
+//		
+//		Connection con = dbcon();
+//		String sql = "insert into ordertbl (order_no, user_id, order_date) values (?,?,?)";
+//		
+//		
+//		return 0;
+//	}
+	
 		
 	
 	

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_product.css" />
 <style>
 table {
 	border: 1px solid black;
@@ -79,7 +80,7 @@ td {
 			<%=result%></div>
 	</form>
 	<script>
-function setQuantityToZero() {
+	function setQuantityToZero() {
     // 모든 수량 입력 필드를 0으로 설정
     const quantityInputs = document.querySelectorAll('input[type="number"]');
     quantityInputs.forEach(input => {
