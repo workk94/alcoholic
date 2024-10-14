@@ -95,7 +95,7 @@ td {
 
 			</table>
 			
-				합계 금액: <%= result2 %>
+				합계 금액: <%= result2 %>원
 				
 		</div>
 	</main>

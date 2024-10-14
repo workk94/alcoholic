@@ -99,16 +99,21 @@ td {
 
 	
 					<tr>
-					<form action="/web/updatecart" method="post">
+					<form action="/web/ordercreate" method="post">
 						<td><%=s.getImg_url()%></td>
 						<td><%=s.getProd_no()%></td>
 						<td><%=s.getName()%></td>
 						<td><input type="number" value="1" min="0"
 							name="quantity" class="quantbtn"></td>
-						<td><%=s.getPrice()%>   <input type="hidden" name="code" value="<%=s.getProd_no()%>" ></td>
-						<td><input type="submit" value="order" class="orderbtn">
-							<br> <a href="/web/deletecart?code=<%=s.getProd_no()%>"
-							class="delbtn">delete</a></td>
+						<td>
+						<input type="hidden" name="Date" value="sysdate">
+						<%=s.getPrice()%>   <input type="hidden" name="code" value="<%=s.getProd_no()%>" >
+						</td>
+						<td>
+						<input type="submit" value="order" class="orderbtn">  <br>
+							 <a href="/web/deletecart?code=<%=s.getProd_no()%>"
+							class="delbtn">delete</a>
+						</td>
 					 </form>
 					</tr>
 
