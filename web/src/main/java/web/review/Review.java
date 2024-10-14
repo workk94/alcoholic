@@ -1,5 +1,7 @@
 package web.review;
 
+import web.model.User;
+
 public class Review {
 
 	//review_no, user_id, product_no, item_no, contents, rating,  created_at
@@ -7,6 +9,7 @@ public class Review {
 	//상품테이블	 고객테이블	 주문아이템	  주문아이템					
 	
 	String review_no;	//1
+	 User user;           // User 객체
 	String user_id;			//6
 	String product_no;	//2
 	String item_no;		//3
@@ -19,19 +22,14 @@ public class Review {
 	}
 	
 	
-	public Review(String user_id, String product_no, String item_no, String contents, String rating) {
-		this.user_id = user_id;
-		this.product_no = product_no;
-		this.item_no = item_no;
-		this.contents = contents;
-		this.rating = rating;
-	}
 
 
-	public Review(String review_no, String user_id, String product_no, String item_no, String contents, String rating,
+	public Review(String review_no,User user, String product_no, String item_no, String contents, String rating,
 			String created_at) {
+		
 		this.review_no = review_no;
-		this.user_id = user_id;
+		this.user = user;
+	    this.user_id = user != null ? user.getId() : null; // 사용자 ID 설정
 		this.product_no = product_no;
 		this.item_no = item_no;
 		this.contents = contents;
@@ -39,13 +37,33 @@ public class Review {
 		this.created_at = created_at;
 	}
 
+	//userId, productNo, itemNo, contents, rating
+	
+	public Review(User user, String product_no, String item_no, String contents, String rating) {
+		this.user = user;
+		this.user_id = user != null ? user.getId() : null; // 사용자 ID 설정
+		this.product_no = product_no;
+		this.item_no = item_no;
+		this.contents = contents;
+		this.rating = rating;
+	}
+	
+
+//	@Override
+//	public String toString() {
+//		return "Review [review_no=" + review_no + ", user_id=" + id + ", product_no=" + product_no + ", item_no="
+//				+ item_no + ", contents=" + contents + ", rating=" + rating + ", created_at=" + created_at + "]";
+//	}
+
+
+
 
 	@Override
-	public String toString() {
-		return "Review [review_no=" + review_no + ", user_id=" + user_id + ", product_no=" + product_no + ", item_no="
-				+ item_no + ", contents=" + contents + ", rating=" + rating + ", created_at=" + created_at + "]";
-	}
-
+	    public String toString() {
+	        return "Review [review_no=" + review_no + ", user_id=" + user_id  + 
+	               ", product_no=" + product_no + ", item_no=" + item_no + ", contents=" + contents + 
+	               ", rating=" + rating + ", created_at=" + created_at + "]";
+	    }
 
 	public String getReview_no() {
 		return review_no;
@@ -57,16 +75,28 @@ public class Review {
 	}
 
 
-	public String getUser_id() {
-		return user_id;
-	}
+
+    
+    
+    //
+	public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        this.user_id = user != null ? user.getId() : null; // User가 변경될 때 user_id 업데이트
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
 
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-
-
+	
+	
+	
+	
 	public String getProduct_no() {
 		return product_no;
 	}
@@ -118,10 +148,10 @@ public class Review {
 
 
 	//review_no, user_id, product_no, item_no, contents, rating, created_at
-	public static void main(String[] args) {
-		Review r =new Review("1","2","3","4","5","6","7");
-		System.out.println(r);
-		
+	 public static void main(String[] args) {
+	        User user = new User(); // User 객체 생성
+	        user.setId("6"); // 사용자 ID 설정
+	        Review r = new Review("1", user, "2", "3", "This is a review.", "5", "2024-10-14");
+	        System.out.println(r); // Review 객체 출력
+	    }
 	}
-	
-}
