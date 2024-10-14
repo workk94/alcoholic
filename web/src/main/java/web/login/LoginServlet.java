@@ -38,10 +38,10 @@ public class LoginServlet extends HttpServlet {
 		String user_pw = req.getParameter("user_pw");
 
 		UserService service = new UserService();
-		User admin = service.userLogin(user_id, user_pw);
+		User user = service.userLogin(user_id, user_pw);
 
-		if (admin != null) {
-			session.setAttribute("currentUser", admin);
+		if (user != null) {
+			session.setAttribute("currentUser", user);
 			resp.sendRedirect(req.getContextPath() + "/main");
 		} else {
 			String msg = "로그인 실패";

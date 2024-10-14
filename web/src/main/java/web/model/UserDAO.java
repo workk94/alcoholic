@@ -50,6 +50,29 @@ public class UserDAO {
 
 		return list;
 	}
+	
+	public int selectId(String id) {
+	    String sql = "SELECT id FROM USERTBL WHERE id = ?";
+	    int result = -1;
+
+	    try (Connection con = dbCon();
+	         PreparedStatement pst = con.prepareStatement(sql)) {
+
+	        pst.setString(1, id);
+
+	        try (ResultSet rs = pst.executeQuery()) {
+	            if (rs.next()) {
+	                return 1; 
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return result; 
+	}
+
 
 	public User findByIdAndPassword(String id, String pw) {
 	    User user = null;
@@ -65,8 +88,8 @@ public class UserDAO {
 	            if (rs.next()) {
 	                user = new User();
 	                user.setId(rs.getString("id"));
-	                user.setName(rs.getString("password"));
-	                user.setPw(rs.getString("name"));
+	                user.setPw(rs.getString("password"));
+	                user.setName(rs.getString("name"));
 	                user.setSsn(rs.getString("ssn"));
 	                user.setPhone(rs.getString("phone"));
 	                user.setAddr(rs.getString("address"));

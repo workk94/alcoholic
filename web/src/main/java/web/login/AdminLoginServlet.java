@@ -28,9 +28,11 @@ public class AdminLoginServlet extends HttpServlet{
 		AdminDTO admin = service.adminLogin(admin_id, admin_pw);
 
 		if (admin != null) {
-			// 바꿔야됨
+			session.setAttribute("currentUser", admin);
 			resp.sendRedirect(req.getContextPath() + "/admin");
 		} else {
+			String msg = "로그인 실패";
+			session.setAttribute("msg", msg);
 			resp.sendRedirect(req.getContextPath() + "/adminlogin");
 		}
 	}
