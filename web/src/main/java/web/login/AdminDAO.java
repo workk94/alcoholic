@@ -32,7 +32,7 @@ public class AdminDAO {
 	
 	public AdminDTO findByIdAndPassword(String id, String pw) {
 		AdminDTO admin = null;
-	    String sql = "SELECT * FROM USERTBL WHERE id = ? AND password = ?";
+	    String sql = "SELECT * FROM ADMINTBL WHERE id = ? AND password = ?";
 	    
 	    try (Connection con = dbCon();
 	         PreparedStatement pst = con.prepareStatement(sql)) {
@@ -44,8 +44,9 @@ public class AdminDAO {
 	            if (rs.next()) {
 	            	admin = new AdminDTO();
 	                admin.setId(rs.getString("id"));
-	                admin.setName(rs.getString("password"));
-	                admin.setPw(rs.getString("name"));
+	                admin.setPw(rs.getString("password"));
+	                admin.setName(rs.getString("name"));
+	                
 	            }
 	        }
 	        
