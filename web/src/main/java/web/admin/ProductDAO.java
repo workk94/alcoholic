@@ -83,7 +83,7 @@ public class ProductDAO {
 		}
 		return list;
 	}
-	//고객 한명 정보 조회
+	//상품 정보 조회
 	public Product selectOne(String no) {
 		Connection con = dbcon();
 		PreparedStatement pst = null;

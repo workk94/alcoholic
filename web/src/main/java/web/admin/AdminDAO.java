@@ -160,6 +160,72 @@ public class AdminDAO {
 		return rRow;
 	}
 	
+	// 페이징 리스트 구하기
+		public ArrayList<Admin> selectListPaging(int currentPage, int pageSize) {
+			Connection con = null;
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+			int start = 1;
+			int end = 5;
+
+			start = (currentPage - 1) * pageSize + 1;
+			end = currentPage * pageSize; // 1 => 1~10 2 => 11~20
+
+			String sql = " select * " + " from " + " (select rownum num,id,password,name,ssn,phone,address from usertbl) "
+					+ " where num between ? and ? "; // 페이징쿼리
+			ArrayList<Admin> list = new ArrayList<>();
+
+			con = dbcon();
+			try {
+				pst = con.prepareStatement(sql);
+				
+				pst.setInt(1, start);
+				pst.setInt(2, end);
+				
+				rs = pst.executeQuery();
+
+				while (rs.next()) {
+					String id = rs.getString(2);
+					String pw = rs.getString(3);
+					String name = rs.getString(4);
+					String ssn = rs.getString(5);
+					String phone = rs.getString(6);
+					String address = rs.getString(7);
+
+					Admin user = new Admin(id, pw, name, ssn,phone,address);
+
+					list.add(user);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				dbclose(con, pst, rs);
+			}
+			return list;
+		}
+		public int selectTotalCnt() {
+			
+			Connection con = dbcon();
+
+			String sql = "select count(*) from usertbl"; // 전체레코드 수
+			int rowTotalCnt = 0;
+
+			try {
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+
+				if (rs.next()) {
+					rowTotalCnt = rs.getInt(1);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return rowTotalCnt;
+		}
 	
 	public static void main(String[] args) {
 		AdminDAO dao = new AdminDAO();
