@@ -1,4 +1,4 @@
-<%-- <%@page import="web.review.Paging"%> --%>
+<%@page import="web.review.Paging"%>
 <%@page import="web.review.Review"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
