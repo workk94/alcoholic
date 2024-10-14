@@ -33,33 +33,34 @@ public class Paging {
 	}
 
 	private void calcPage() {
-		//1.총 페이지 수 구하기
-		//2.현재 페이지에 대한 현재그룹 구하기
-		//3. 현재 그룹 시작번호
-		//4. 현재 그룹 마지막번호 
+//		//1.총 페이지 수 구하기
+//		int remain = totRecords % pageSize;
+//		
+//		if(remain == 0) {
+//			totalPage	= totRecords / pageSize ;
+//		}else {
+//			totalPage	= totRecords / pageSize +1;
+//		}
+//		//2.현재 페이지에 대한 현재그룹 구하기
+//		int remain2 = currentPage % grpSize ; 
+//		if(remain2 == 0) {
+//			currentGroup = currentPage / grpSize ;
+//		} else {
+//			currentGroup = currentPage / grpSize +1;
+//		}
 		
-		//1.
-		int remain = totRecords % pageSize;
-		
-		if(remain ==0) {
-			totalPage	= totRecords / pageSize ;
-		}else {
-			totalPage	= totRecords / pageSize +1;
-		}
-		//2.
-		int remain2 = currentPage % grpSize ; 
-		if(remain2 == 0) {
-			currentGroup = currentPage / grpSize ;
-		} else {
-			currentGroup = currentPage / grpSize +1;
-		}
-		
-		//3.
-		grpStartPage = (currentGroup - 1 )*grpSize +1; 
-		grpEndPage = currentPage *grpSize;
+	    // 1. 총 페이지 수 구하기
+	    totalPage = (totRecords + pageSize - 1) / pageSize; // 전체 페이지 수 계산
+
+	    // 2. 현재 그룹 구하기
+	    currentGroup = (currentPage - 1) / grpSize + 1;
 		
 		
-		//4. 그룹의 마지막 값 확인하기
+		//3. 현재 그룹 시작번호 와 마지막 번호 
+		grpStartPage = (currentGroup - 1 ) * grpSize +1; 
+		grpEndPage = currentGroup  * grpSize;
+
+		//	4. 그룹의 마지막 값 확인하기
 		if(grpEndPage > totalPage) {
 			grpEndPage = totalPage;
 		}
@@ -105,16 +106,11 @@ public class Paging {
 	//	public PageHandler(int pageSize, int grpSize, int totRecords, int currentPage) {
 
 	public static void main(String[] args) {
-	
-		Paging page = new Paging(10,4,153,13);
-//		PageHandler page = new PageHandler(7,6,513,9);
-		
-		System.out.println(page.getTotalPage());
-		System.out.println(page.getCurrentGroup());
-		System.out.println(page.getGrpStartPage());
-		System.out.println(page.getGrpEndPage());
-	
-
-}
+	    Paging page = new Paging(10, 5, 153, 13); // 예시 값
+	    System.out.println("Total Pages: " + page.getTotalPage());
+	    System.out.println("Current Group: " + page.getCurrentGroup());
+	    System.out.println("Group Start Page: " + page.getGrpStartPage());
+	    System.out.println("Group End Page: " + page.getGrpEndPage());
+	}
 
 }
