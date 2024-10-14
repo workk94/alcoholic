@@ -24,7 +24,9 @@
         </tr>
         <tr>
             <td>주소</td>
-            <td><input type="text" name="addr" value="${user.addr}"></td>
+            <td><input type="text" name="addr" value="${user.addr}">
+               <input type="text" name="id" value="${user.id}">
+            </td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="정보 수정"></td>

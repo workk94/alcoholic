@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import web.login.User;
+
 public class MyPageDAO {
     String driver = "oracle.jdbc.driver.OracleDriver";
     String url = "jdbc:oracle:thin:@localhost:1521:testdb";
@@ -26,20 +28,18 @@ public class MyPageDAO {
         return con;
     }
 
-    public void update(String id, String pw, String ssn, String phone, String addr) {
+    public void update(User user) {
         Connection con = null;
         PreparedStatement pst = null;
 
-        String sql = "UPDATE usertbl SET password=?, ssn=?, phone=?, address=? WHERE id=?";
+        String sql = "UPDATE usertbl SET password=?, phone=?, address=? WHERE id=?";
         try {
             con = dbcon();
             pst = con.prepareStatement(sql);
-            pst.setString(1, pw);
-            pst.setString(2, ssn);
-            pst.setString(3, phone);
-            pst.setString(4, addr);
-            pst.setString(5, id);
-
+            pst.setString(1, user.getPw());
+            pst.setString(2, user.getPhone());
+            pst.setString(3, user.getAddr());
+            pst.setString(4, user.getId());
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
@@ -47,6 +47,27 @@ public class MyPageDAO {
         close(pst, con);
     }
 
+    public void insertMember(User user) {
+    	Connection con = dbcon();
+    	PreparedStatement pst = null;
+    	
+    	String sql = "insert into dd(pw, phone, addr) values(?, ?, ?)";
+    	
+    	try{
+    		con = dbcon();
+    		pst = con.prepareStatement(sql);
+    		
+    		pst.setString(1, user.getPw());
+    		pst.setString(2, user.getPhone());
+    		pst.setString(3, user.getAddr());
+    		
+    		pst.executeUpdate();
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    	close(pst, con);
+    }
+    
     public void close(AutoCloseable... a) {
         for (AutoCloseable item : a) {
             try {
