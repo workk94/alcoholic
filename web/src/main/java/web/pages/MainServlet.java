@@ -27,7 +27,7 @@ public class MainServlet extends HttpServlet {
 
         ArrayList<ProductDTO> list = service.getProducts(currentPage, pageSize);
         PageHandler handler = new PageHandler(currentPage, totRecords);
-
+        
         req.setAttribute("list", list);
         req.setAttribute("paging", handler);
         req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp);

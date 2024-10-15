@@ -28,7 +28,7 @@
         <!-- 우측 상단 로그인&회원가입 -->
         <div class="login">
             <p><%=admin.getName() %> 님 , 안녕하세요.</p>
-            <a class="log_btn">LOGOUT</a>
+            <a href="${pageContext.request.contextPath}/logout?type=admin">LOGOUT</a>
         </div>
     </header>
  

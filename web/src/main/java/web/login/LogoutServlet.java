@@ -15,8 +15,16 @@ import javax.websocket.Session;
 public class LogoutServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String type = req.getParameter("type");
+		
 		HttpSession session = req.getSession();
-		session.invalidate();
+		
+		if (type.equals("user")) {
+			session.removeAttribute("currentUser");
+		} else if (type.equals("admin")) {
+			session.removeAttribute("currentAdmin");
+		}
+		
 		resp.sendRedirect(req.getContextPath() +"/main");
 	}
 }
