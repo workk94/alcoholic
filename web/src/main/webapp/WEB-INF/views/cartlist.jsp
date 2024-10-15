@@ -1,3 +1,4 @@
+<%@page import="web.model.User"%>
 <%@page import="web.userpage.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -78,7 +79,7 @@ td {
 
 				<%
 				ArrayList<Product> list = (ArrayList<Product>) session.getAttribute("cartlist");
-				%>
+			 %>
 
 				<h1 class="title">CART</h1>
 
@@ -100,7 +101,7 @@ td {
 	
 					<tr>
 					<form action="/web/ordercreate" method="post">
-						<td><%=s.getImg_url()%></td>
+						<td> <img alt="<%=s.getName()%>" src="<%=s.getImg_url()%>"> </td>
 						<td><%=s.getProd_no()%></td>
 						<td><%=s.getName()%></td>
 						<td><input type="number" value="1" min="0"

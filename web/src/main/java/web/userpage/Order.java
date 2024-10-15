@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class Order {
 	
-	String order_no;
+	int order_no;
 	String user_id;
 	String name;
 	String category;
 	int price;
 	String quantity;
 	Date order_date;
-	
+
 	
 	public Order() {
 		// TODO Auto-generated constructor stub
@@ -20,16 +20,24 @@ public class Order {
 	
 
 
-	public Order( String user_id, String name, String category, int price, String quantity,
-			Date order_date) {
+	public Order( int order_no, String user_id, String name, String category, int price, String quantity, Date order_date) {
 		super();
-		
+		this.order_no = order_no;
 		this.user_id = user_id;
 		this.name = name;
 		this.category = category;
 		this.price = price;
 		this.quantity = quantity;
 		this.order_date = order_date;
+	}
+
+	
+	public int getOrder_no() {
+		return order_no;
+	}
+
+	public void setOrder_no(int order_no) {
+		this.order_no = order_no;
 	}
 
 
