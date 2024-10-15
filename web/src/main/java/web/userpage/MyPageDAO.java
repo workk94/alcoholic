@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import web.model.User;
 
 
 public class MyPageDAO {
@@ -30,7 +29,7 @@ public class MyPageDAO {
         return con;
     }
 
-    public void update(User user) {
+    public void update(web.model.User user) {
         Connection con = null;
         PreparedStatement pst = null;
 
@@ -49,7 +48,7 @@ public class MyPageDAO {
         close(pst, con);
     }
 
-    public void insertMember(User user) {
+    public void insertMember(web.model.User user) {
     	Connection con = dbcon();
     	PreparedStatement pst = null;
     	

@@ -107,7 +107,8 @@ public class UserDAO {
     public void update(User user) {
         Connection con = null;
         PreparedStatement pst = null;
-
+        System.out.println("set");
+      
         String sql = "UPDATE usertbl SET password=?, phone=?, address=? WHERE id=?";
         try {
             con = dbCon();

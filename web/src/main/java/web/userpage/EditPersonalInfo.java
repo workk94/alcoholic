@@ -45,28 +45,23 @@ public class EditPersonalInfo extends HttpServlet {
             String newPhone = req.getParameter("phone");
             String newAddr = req.getParameter("addr");
             
-            String id = req.getParameter("id");
+//            String id = req.getParameter("id");
+            String id = currentUser.getId();
             System.out.println(newPassword);
             System.out.println(newPhone);
             System.out.println(newAddr);
-            
-            
-         
-            
-            // DAO를 사용하여 데이터베이스 업데이트
-            UserDAO dao = new UserDAO();
-            dao.update(currentUser);
-            
-            
+            System.out.println(id);
             
             
             // User 객체의 정보 수정
             currentUser.setPw(newPassword);
             currentUser.setPhone(newPhone);
             currentUser.setAddr(newAddr);
-            currentUser.setId(id);
+        
             
-            
+            // DAO를 사용하여 데이터베이스 업데이트
+            UserDAO dao = new UserDAO();
+            dao.update(currentUser);
             
             
             // 업데이트가 완료된 후 마이페이지로 리다이렉트
@@ -76,4 +71,3 @@ public class EditPersonalInfo extends HttpServlet {
         }
     }
 }
-
