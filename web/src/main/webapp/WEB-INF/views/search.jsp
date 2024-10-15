@@ -1,34 +1,54 @@
-<%@page import="web.pages.ProductDTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>검색 페이지</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
+
 <body>
-<jsp:include page="../componants/header.jsp"></jsp:include>
+	<!-- 헤더 부분 -->
+	<jsp:include page="../componants/header.jsp"></jsp:include>
 
-<% ArrayList<ProductDTO> list = (ArrayList<ProductDTO>)request.getAttribute("searchList"); %>
+	<main>
+	
+		<!-- 검색 바 -->
+		<form action="${pageContext.request.contextPath}/search" method="GET">
+			<input type="text" id="searchBar" name="s_keyword"
+				placeholder="검색어를 입력하세요">
+			<button type="submit" class="searchBtn">검색</button>
+		</form>
+		<div class="container">
+			<c:choose>
+				<c:when test="${not empty list}">
+					<c:forEach var="product" items="${list}">
+						<div class="item">
+							<a
+								href="${pageContext.request.contextPath}/shop?product_no=${product.productNo}">
+								<img class="item_img" src="${product.imgUrl}"
+								alt="${product.pname}">
+							</a> <a
+								href="${pageContext.request.contextPath}/shop?product_no=${product.productNo}">
+								<p class="item_name">${product.pname}</p>
+							</a>
+							<p class="price">${product.price}원</p>
+						</div>
+					</c:forEach>
+				</c:when>
 
-
-<c:choose>
-<c:when test="${!empty list }">
-<ul>
-<% for(ProductDTO p : list){ %>
-<li><%= p.getPname() %></li>
-<li><%= p.getCategory()%></li>
-<%} %>
-</ul>
-</c:when>
-<c:otherwise>
-검색 결과가 없습니다
-</c:otherwise>
-</c:choose>
-
+				<c:otherwise>
+					<p>검색 결과가 없습니다.</p>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</main>
 </body>
 </html>

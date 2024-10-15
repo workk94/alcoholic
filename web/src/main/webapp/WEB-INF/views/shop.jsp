@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${product.name } 상품 페이지</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <link href="css/shop.css" rel="stylesheet" type="text/css">
 </head>

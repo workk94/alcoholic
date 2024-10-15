@@ -26,14 +26,14 @@
 
 			<c:forEach var="i" begin="${paging.grpStartPage}"
 				end="${paging.grpEndPage}">
-				<a href="?p=${i}" class="${i == paging.currentPage ? 'active' : ''}">${i}</a>
+				<a href="?p=${i}">${i}</a>
 			</c:forEach>
 
 			<c:if test="${paging.grpEndPage < paging.totalPage}">
 				<a href="?p=${paging.grpEndPage + 1}">[다음]</a>
 			</c:if>
 			<form action="${pageContext.request.contextPath}/search" method="GET">
-				<input type="text" id="searchBar" name="s_keword"
+				<input type="text" id="searchBar" name="s_keyword"
 					placeholder="검색어를 입력하세요">
 				<button type="submit" class="searchBtn">검색</button>
 			</form>

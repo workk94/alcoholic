@@ -199,13 +199,4 @@ public class ShopDAO {
 		return list;
 	}
 
-	public static void main(String[] args) {
-		ShopDAO dao = new ShopDAO();
-		
-		ArrayList<ProductDTO> list = dao.selectProductByName("블랙");
-		for(ProductDTO p : list) {
-			System.out.println(p);
-		}
-	}
-	
 }
