@@ -12,10 +12,11 @@ public class UpdateReview extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String review_No = req.getParameter("review_no");
+	    String reviewNoStr = req.getParameter("review_no");
+	    int reviewNo = Integer.parseInt(reviewNoStr); // String을 int로 변환
 		
         ReviewService service = new ReviewService();
-        Review reviewNO = service.getReview(review_No);
+        Review reviewNO = service.getReview(reviewNo);
 
 		req.setAttribute("review", reviewNO);
 		
@@ -30,7 +31,8 @@ public class UpdateReview extends HttpServlet{
 		
         String contents = req.getParameter("contents");
         String rating = req.getParameter("rating");
-		String reviewNo = req.getParameter("review_no");
+        String reviewNoStr = req.getParameter("review_no");
+	    int reviewNo = Integer.parseInt(reviewNoStr); // String을 int로 변환
 
         Review review = new Review();
         review.setContents(contents); // 내용 설정

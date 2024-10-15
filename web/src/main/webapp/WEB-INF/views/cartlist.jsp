@@ -1,3 +1,4 @@
+<%@page import="web.model.User"%>
 <%@page import="web.userpage.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -78,7 +79,7 @@ td {
 
 				<%
 				ArrayList<Product> list = (ArrayList<Product>) session.getAttribute("cartlist");
-				%>
+			 %>
 
 				<h1 class="title">CART</h1>
 
@@ -99,16 +100,21 @@ td {
 
 	
 					<tr>
-					<form action="/web/updatecart" method="post">
-						<td><%=s.getImg_url()%></td>
+					<form action="/web/ordercreate" method="post">
+						<td> <img alt="<%=s.getName()%>" src="<%=s.getImg_url()%>"> </td>
 						<td><%=s.getProd_no()%></td>
 						<td><%=s.getName()%></td>
-						<td><input type="number" value="1" min="0"
+						<td><input type="number" value="<%=s.getQuantity() %>" min="0"
 							name="quantity" class="quantbtn"></td>
-						<td><%=s.getPrice()%>   <input type="hidden" name="code" value="<%=s.getProd_no()%>" ></td>
-						<td><input type="submit" value="order" class="orderbtn">
-							<br> <a href="/web/deletecart?code=<%=s.getProd_no()%>"
-							class="delbtn">delete</a></td>
+						<td>
+						<input type="hidden" name="Date" value="sysdate">
+						<%=s.getPrice()%>   <input type="hidden" name="code" value="<%=s.getProd_no()%>" >
+						</td>
+						<td>
+						<input type="submit" value="order" class="orderbtn">  <br>
+							 <a href="/web/deletecart?code=<%=s.getProd_no()%>"
+							class="delbtn">delete</a>
+						</td>
 					 </form>
 					</tr>
 

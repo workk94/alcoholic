@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="web.userpage.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -58,14 +60,11 @@
 	border: 1px solid black;
 }
 
-.addToCart, .orderNow {
+.addToCart {
 	padding: 10px 20px;
 	margin-right: 10px;
 	cursor: pointer;
 	border: 1px solid black;
-}
-
-.orderNow {
 	background-color: #ff6b6b;
 	color: white;
 }
@@ -77,23 +76,26 @@
 <body>
 	<!-- header -->
 	<jsp:include page="../componants/header.jsp"></jsp:include>
-	
+
 	<!-- body -->
 	<div class="item_wrap">
 		<div class="item_img">
-			<img alt="${product.pname}" src="${product.imgUrl}">
+			<img alt="${product.name}" src="${product.img_url}">
 		</div>
 		<div class="item_info">
-			<div class="product_name">${product.pname}</div>
-			<div class="product_category">${product.category}</div>
-			<div class="product_price">${product.price}원</div>
-			<div>
-				<input class="cartQty" type="number">
-			</div>
-			<div>
-				<button class="addToCart">장바구니에 넣기</button>
-				<button class="orderNow">주문하기</button>
-			</div>
+			<div class="item_info">
+					<div class="product_name">${product.name}</div>
+					<div class="product_category">${product.category}</div>
+					<div class="product_price">${product.price}원</div>
+					<div>
+						<form action="addcart" method="get">
+							<input type="hidden" name="code" value="${product.prod_no}">
+							<input class="cartQty" type="number" name="qty" placeholder="1"
+								min="1" >
+							<button type="submit" class="addToCart">장바구니에 넣기</button>
+						</form>
+					</div>
+				</div>
 		</div>
 	</div>
 </body>
