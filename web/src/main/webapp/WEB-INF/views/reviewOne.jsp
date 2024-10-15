@@ -1,3 +1,4 @@
+<%@page import="web.model.User"%>
 <%@page import="web.review.Review"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리뷰 페이지 </title>
 <link rel="stylesheet" type="text/css" href="/web/css/reviewOne.css">
 </head>
 
@@ -19,38 +20,49 @@
     
 <!-- 메인 부분 시작 -->
 <main>
- <div class="container">
-   <h1 class="title"> 리뷰 페이지 </h1>
-<% Review review = (Review) request.getAttribute("reviewOne"); %>
-<% if (review != null) { %>
-<table>
-    <tr><th>리뷰 번호</th><td><%=review.getReview_no() %></td></tr>
-    <tr><th>작성자</th><td><%=review.getUser_id() %></td></tr>
-    <tr><th>제품 번호</th><td><%=review.getProduct_no() %></td></tr>
-    <tr><th>아이템 번호</th><td><%=review.getItem_no() %></td></tr>
-    <tr><th>내용</th><td><%=review.getContents() %></td></tr>
-    <tr><th>평점</th><td><%=review.getRating() %></td></tr>
-    <tr><th>작성 시간</th><td><%=review.getCreated_at() %></td></tr>
-</table>
+    <div class="container">
+        <h1 class="title">리뷰 페이지</h1>
+        <% 
+        Review review = (Review) request.getAttribute("reviewOne"); 
+        User user = (User) session.getAttribute("currentUser");
 
-<!-- 수정 버튼 추가 -->
-<div class="button-container">
-<form action="/web/reviewUpdate" method="get">
-    <input type="hidden" name="review_no" value="<%=review.getReview_no() %>">
-    <input type="submit" value="수정">
-</form>
-<form action="/web/delete" method="get">
-    <input type="hidden" name="review_no" value="<%=review.getReview_no() %>">
-    <input type="submit" value="삭제">
-</form>
-</div>
-<% 
-} else {
-    out.println("<p>해당 리뷰를 찾을 수 없습니다.</p>");
-}
-%>
-<div class="new_wrap"><a class="new" href="review">목록으로 돌아가기</a></div>
-</div>
+        if (review != null) { 
+        %>
+            <table>
+                <tr><th>리뷰 번호</th><td><%= review.getReview_no() %></td></tr>
+                <tr><th>작성자</th><td><%= review.getUser_id() %></td></tr>
+                <tr><th>제품 번호</th><td><input id="ssn" name="ssn" type="text" value="<%= review.getProduct_no() %>" readonly="readonly"></td></tr>
+                <tr><th>아이템 번호</th><td><%= review.getItem_no() %></td></tr>
+                <tr><th>내용</th><td><%= review.getContents() %></td></tr>
+                <tr><th>평점</th><td><%= review.getRating() %></td></tr>
+                <tr><th>작성 시간</th><td><%= review.getCreated_at() %></td></tr>
+            </table>
+
+            <% 
+            // 로그인 상태일 때만 "수정/삭제" 버튼을 보이게 함
+            if (user != null) { 
+            %>
+                <div class="button-container">
+                    <form action="/web/reviewUpdate" method="get">
+                        <input type="hidden" name="review_no" value="<%= review.getReview_no() %>">
+                        <input type="submit" value="수정">
+                    </form>
+                    <form action="/web/delete" method="get">
+                        <input type="hidden" name="review_no" value="<%= review.getReview_no() %>">
+                        <input type="submit" value="삭제">
+                    </form>
+                </div>
+            <% 
+            } 
+            %>
+        <% 
+        } else {
+            out.println("<p>해당 리뷰를 찾을 수 없습니다.</p>");
+        }
+        %>
+
+        <div class="new_wrap"><a class="new" href="review">목록으로 돌아가기</a></div>
+    </div>
 </main>
 </body>
 </html>
