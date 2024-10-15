@@ -17,8 +17,18 @@ public class AddCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String code = req.getParameter("code");
         String qty_ = req.getParameter("qty");
+        
+        int qty = 1;
 
-        int qty = Integer.parseInt(qty_);
+        
+        try {
+            if (qty_ != null && !qty_.isEmpty()) {  
+                qty = Integer.parseInt(qty_);
+            }
+        } catch (NumberFormatException e) {
+            qty = 1;
+        }
+        
 
         ProductDAO dao = new ProductDAO();
         Product product = dao.selectOne(code);
