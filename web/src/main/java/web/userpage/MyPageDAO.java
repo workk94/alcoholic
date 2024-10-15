@@ -1,11 +1,12 @@
 package web.userpage;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import web.login.User;
+import web.model.User;
 
 public class MyPageDAO {
     String driver = "oracle.jdbc.driver.OracleDriver";

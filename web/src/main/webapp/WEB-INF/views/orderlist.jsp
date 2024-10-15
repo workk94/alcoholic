@@ -1,3 +1,5 @@
+<%@page import="web.model.User"%>
+<%@page import="web.userpage.Product"%>
 <%@page import="web.userpage.Order"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -38,12 +40,18 @@ table {
 	border-top: 1px solid black;
 	border-collapse: collapse;
 	margin: 100px auto;
+	position: relative;
 }
 
 td {
 	border-bottom: 1px solid black;
 	padding: 10px;
 	text-align: center;
+}
+
+.totalprice {
+	position: relative;
+	top: -50px;
 }
 </style>
 </head>
@@ -59,7 +67,7 @@ td {
 			<table>
 
 				<tr>
-					<td>아이디</td>
+					<td>이미지</td>
 					<td>제품명</td>
 					<td>카테고리</td>
 					<td>가격</td>
@@ -68,15 +76,16 @@ td {
 				</tr>
 
 				<%
-				ArrayList<Order> list = (ArrayList<Order>) request.getAttribute("cartlist");
+				ArrayList<Order> orderlist = (ArrayList<Order>) request.getAttribute("cartlist");
 				int result2 = 0;
 				%>
 
 				<%
-				for (Order order : list) {
+
+					for (Order order : orderlist) {
 				%>
 				<tr>
-					<td><%=order.getUser_id()%></td>
+					<td> <img alt="<%= order.getName() %>" src="<%=order.getProduct().getImg_url() %>"> </td>
 					<td><%=order.getName()%></td>
 					<td><%=order.getCategory()%></td>
 					<td><%=order.getPrice()%></td>
@@ -85,18 +94,22 @@ td {
 				</tr>
 				<%
 				int result = 0;
-				
+
 				result += order.getPrice() * Integer.parseInt(order.getQuantity());
 				result2 += result;
 				%>
 				<%
+				
+				
 				}
 				%>
 
 			</table>
-			
-				합계 금액: <%= result2 %>원
-				
+			<div class="totalprice">
+				합계 금액:
+				<%=result2%>원
+			</div>
+
 		</div>
 	</main>
 </body>

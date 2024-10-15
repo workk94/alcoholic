@@ -1,6 +1,6 @@
 package web.userpage;
 
-import web.login.User;
+import web.model.User;
 
 public class MyPageService {
     MyPageDAO mypagedao = new MyPageDAO();
