@@ -85,7 +85,7 @@ td {
 					for (Order order : orderlist) {
 				%>
 				<tr>
-					<td> <img alt="<%= order.getName() %>" src="<%=order.getProduct().getImg_url() %>"> </td>
+					<td></td>
 					<td><%=order.getName()%></td>
 					<td><%=order.getCategory()%></td>
 					<td><%=order.getPrice()%></td>

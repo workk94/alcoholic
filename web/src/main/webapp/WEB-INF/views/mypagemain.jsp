@@ -66,6 +66,9 @@
 </style>
 </head>
 <body>
+<!--  header -->
+<jsp:include page="../componants/header.jsp"></jsp:include>
+
 
 <h1>MyPage</h1>
 
