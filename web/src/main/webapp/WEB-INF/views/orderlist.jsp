@@ -67,7 +67,6 @@ td {
 			<table>
 
 				<tr>
-					<td>이미지</td>
 					<td>제품명</td>
 					<td>카테고리</td>
 					<td>가격</td>
@@ -85,7 +84,6 @@ td {
 					for (Order order : orderlist) {
 				%>
 				<tr>
-					<td></td>
 					<td><%=order.getName()%></td>
 					<td><%=order.getCategory()%></td>
 					<td><%=order.getPrice()%></td>

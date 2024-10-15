@@ -47,6 +47,12 @@ td {
 	text-align: center;
 }
 
+img {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+}
+
 .quantbtn {
 	width: 30px;
 	border: none;
