@@ -66,7 +66,8 @@
 </style>
 </head>
 <body>
-
+    <!--  header -->
+	<jsp:include page="../componants/header.jsp" />
 <h1>MyPage</h1>
 
 <div class="table-container">
