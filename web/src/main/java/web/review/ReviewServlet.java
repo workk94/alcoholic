@@ -22,6 +22,11 @@ public class ReviewServlet extends HttpServlet{
 		ReviewDAO dao = new ReviewDAO();
 		ReviewService service = new ReviewService();
 		
+		// 세션을 가져와서 사용자 ID를 확인
+	    HttpSession session = req.getSession(false); // 세션이 없을 경우 null을 반환
+	    String currentUserId = (session != null) ? (String) session.getAttribute("user_id") : null;
+		
+		
 		int pageSize = 5;
 		int grpSize = 5;
 		int currentPage =1;
@@ -51,13 +56,17 @@ public class ReviewServlet extends HttpServlet{
             allList = dao.listPaging(currentPage, pageSize);
         }
 		
+
 		Paging paging = new Paging(pageSize,grpSize, totRecords,currentPage);
 		
+
 
 		req.setAttribute("allList", allList);
 		System.out.println(allList);
 		req.setAttribute("paging", paging);
 		req.setAttribute("totalCount", totRecords); // 전체 리뷰 수 설정
+	    req.setAttribute("currentUserId", currentUserId); // 사용자 ID를 JSP로 전달
+
 		req.getRequestDispatcher("WEB-INF/views/review.jsp").forward(req, resp);
 	}
 	}

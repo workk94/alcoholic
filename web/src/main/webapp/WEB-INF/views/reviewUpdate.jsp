@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/web/css/reivewOne.css">
+<link rel="stylesheet" type="text/css" href="/web/css/reivew.css">
 <style>
     /* 헤더 스타일 */
     header {
@@ -55,25 +55,25 @@
 <!-- 메인 부분 시작 -->
 <main>
     <% Review updateReview = (Review) request.getAttribute("review"); %>
-<div class="container">
-<h1 class="title">리뷰 수정 페이지</h1>
-<form name="form" action="/web/reviewUpdate" method="post" onsubmit="return updateCheck();">
-<div class="info_wrap">
-<input type="hidden" name="review_no" value="<%=updateReview.getReview_no() %>"/> 
-<p> 사용자 id : <input id="name" name ="name" type="text" value="<%=updateReview.getUser_id() %>" readonly="readonly"> </p>
-<p> 제품 번호 : <input id="ssn" name ="ssn" type="text" value="<%=updateReview.getProduct_no() %>" readonly="readonly"></p>
-<p> 아이템 번호 : <input id="id" name ="id" type="text" value="<%=updateReview.getItem_no() %>" readonly="readonly"> </p>
-<p>평점 : <input type="number" name="rating" id="rating" min="1" max="3" value="<%= updateReview.getRating() %>" /> </p>
-</div>
+    <div class="container">
+        <h1 class="title">리뷰 수정 페이지</h1>
+        <form name="form" action="/web/reviewUpdate" method="post" onsubmit="return updateCheck();">
+            <div class="info_wrap">
+                <input type="hidden" name="review_no" value="<%= updateReview.getReview_no() %>"/> 
+                <p> 사용자 id : <input id="name" name="name" type="text" value="<%= updateReview.getUser_id() %>" readonly="readonly"> </p>
+                <p> 제품 번호 : <input id="ssn" name="ssn" type="text" value="<%= updateReview.getProduct_no() %>" readonly="readonly"></p>
+                <p> 아이템 번호 : <input id="id" name="id" type="text" value="<%= updateReview.getItem_no() %>" readonly="readonly"> </p>
+                <p>평점 : <input type="number" name="rating" id="rating" min="1" max="3" value="<%= updateReview.getRating() %>" /> </p>
+            </div>
 
-<div class="image">
-<label for="contents">내용:</label>
-<textarea name="contents" id="contents" rows="4" cols="50"><%= updateReview.getContents() %></textarea>
-<p><input type="submit" value="수정 완료" /> </p>
-</div>
-</div>
-<div class="new_wrap"><a class="new" href="/web/review">목록으로 돌아가기</a></div>
-</form>
+            <div class="image">
+                <label for="contents">내용:</label>
+                <textarea name="contents" id="contents" rows="4" cols="50"><%= updateReview.getContents() %></textarea>
+                <p><input type="submit" value="수정 완료" /> </p>
+            </div>
+        </form>
+    </div>
+    <div class="new_wrap"><a class="new" href="/web/review">목록으로 돌아가기</a></div>
 </main>
 
 </body>
