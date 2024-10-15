@@ -50,12 +50,14 @@ public class ShopService {
 		}
 		return arr;
 	}
-	
-	//해당되는 jsonArray 가져오기
-	
-	public static void main(String[] args) {
-		ShopService service = new ShopService();
-		System.out.println(service.getProductByCat("wine"));
-		
+
+	public ArrayList<ProductDTO> getProducts(int page, int pageSize) {
+	    return dao.getListPage(page, pageSize);
 	}
+
+	public int getTotal() {
+	    return dao.getTotal();
+	}
+
+	
 }

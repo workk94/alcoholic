@@ -21,7 +21,10 @@
         main {
             min-height: 315px;
             padding: 0 190px 0 190px;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
@@ -95,38 +98,38 @@
             border: 1px solid rgb(128, 128, 128);
             display: block;
         }
+        .pagination {
+        }
+        
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script>
-        function showItemList() {
-            $.ajax({
-                type: "GET",
-                url: "/web/test",
-                success: function(data) {
-                    let str = "<ul>";
-                    for (let i = 0; i < data.length; i++) {
-                        let product = data[i];
-                        str += "<li>" + product.pname + " , " + product.pname + "</li>";
-                    }
-                    str += "</ul>";
-                    $("#result").html(str);
-                },
-                error: function(err) {
-                    console.log(err);
-                }
-            });
-        }
-    </script>
 </head>
 
 <body>    
     <!--  header -->
-	<jsp:include page="../componants/header.jsp" />
+    <jsp:include page="../componants/header.jsp"></jsp:include>
 
     <main>
+    	<!-- 페이징 처리 -->
+        <div class="pagination">
+            <c:if test="${paging.grpStartPage > 1}">
+                <a href="?p=${paging.grpStartPage - 1}">이전</a>
+            </c:if>
+
+            <c:forEach var="i" begin="${paging.grpStartPage}" end="${paging.grpEndPage}">
+                <a href="?p=${i}" class="${i == paging.currentPage ? 'active' : ''}">${i}</a>
+            </c:forEach>
+
+            <c:if test="${paging.grpEndPage < paging.totalPage}">
+                <a href="?p=${paging.grpEndPage + 1}">다음</a>
+            </c:if>
+            <input type="text" id="search_bar">
+            <button>검색</button>
+        </div>
+    
         <div class="container">
-            <c:forEach var="product" items="${productList}">
+            <c:forEach var="product" items="${list}">
                 <div class="item">
                     <a href="${pageContext.request.contextPath}/shop?product_no=${product.productNo}">
                         <img class="item_img" src="${product.imgUrl}" alt="${product.pname}">
@@ -138,6 +141,8 @@
                 </div>
             </c:forEach>
         </div>
+
+        
     </main>
 </body>
 </html>
