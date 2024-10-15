@@ -42,7 +42,6 @@
         font-size: 18px;
     }
 
-
     table input[type="text"], table input[type="password"] {
         width: 100%; 
         padding: 10px;
@@ -75,26 +74,39 @@
         background-color: #0056b3;
     }
 </style>
+<script>
+    function showSuccessMessage() {
+        alert("수정 완료");
+    }
+</script>
 </head>
 <body>
+    <!--  header -->
+    <jsp:include page="../componants/header.jsp" />
 
 <h1>개인정보 수정</h1>
 
-<form action="/web/editPersonalInfo" method="post">
+<form action="/web/editPersonalInfo" method="post" onsubmit="showSuccessMessage()">
     <table>
         <tr>
             <td>비밀번호</td>
-            <td><input type="password" name="pw" value="${user.pw}"></td>
+            <td>
+                <input type="password" id="pw" name="pw" value="${user.pw}">
+                <button type="button" onclick="togglePassword()">보기</button>
+            </td>
         </tr>
         <tr>
             <td>전화번호</td>
-            <td><input type="text" name="phone" value="${user.phone}"></td>
+             <td>
+                <input type="text" name="phone" value="${user.phone}" 
+                    pattern="\d{3}-\d{4}-\d{4}" 
+                    title="전화번호는 000-0000-0000 형식으로 입력해주세요."
+                    required>
+            </td>
         </tr>
         <tr>
             <td>주소</td>
-            <td>
-                <input type="text" name="addr" value="${user.addr}">
-            </td>
+            <td><input type="text" name="addr" value="${user.addr}"></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="수정"></td>
@@ -102,6 +114,17 @@
     </table>
 </form>
 
+<script>
+    function togglePassword() {
+        var pwField = document.getElementById("pw");
+        if (pwField.type === "password") {
+            pwField.type = "text";
+        } else {
+            pwField.type = "password";
+        }
+    }
+</script>
+
+
 </body>
 </html>
-

@@ -21,22 +21,37 @@ public class EditPersonalInfo extends HttpServlet {
         // 세션에서 로그인된 사용자 확인
         HttpSession session = req.getSession(false);
         
+//        if (session != null && session.getAttribute("currentUser") != null) {
+//            // 사용자가 로그인되어 있으면 수정 페이지로 이동
+//            req.getRequestDispatcher("/WEB-INF/views/editPersonalInfo.jsp").forward(req, resp);
+//        } else {
+//            // 세션에 로그인 정보가 없으면 로그인 페이지로 리다이렉트
+//            resp.sendRedirect("/web/login");
+//        }
+        //사용자 정보를 jsp에 전달
         if (session != null && session.getAttribute("currentUser") != null) {
-            // 사용자가 로그인되어 있으면 수정 페이지로 이동
+            
+            User currentUser = (User) session.getAttribute("currentUser");
+            
+            
+            req.setAttribute("user", currentUser);
+            //응답인코딩 utf-8설정
+            resp.setContentType("text/html; charset=UTF-8");
+         
             req.getRequestDispatcher("/WEB-INF/views/editPersonalInfo.jsp").forward(req, resp);
         } else {
-            // 세션에 로그인 정보가 없으면 로그인 페이지로 리다이렉트
+           
             resp.sendRedirect("/web/login");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession( );
+       //요청 인코딩 uft-8설정
+    	 req.setCharacterEncoding("UTF-8");
+    	 
+    	HttpSession session = req.getSession( );
 
-        
-        
-        //
         if  ( session.getAttribute("currentUser") != null) {
             User currentUser = (User) session.getAttribute("currentUser");
             
