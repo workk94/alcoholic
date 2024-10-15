@@ -4,7 +4,77 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인정보 수정</title>
+<title>Edit Personal Info</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: rgba(252, 245, 223, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 40px;
+        margin-bottom: 50px; /* 제목과 폼 사이에 간격 추가 */
+    }
+
+    form {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        width: 400px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table td {
+        padding: 15px;
+        font-size: 18px;
+    }
+
+
+    table input[type="text"], table input[type="password"] {
+        width: 100%; 
+        padding: 10px;
+        font-size: 18px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: rgba(252, 245, 223, 0.95);
+        box-sizing: border-box; 
+    }
+
+    table input:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    table input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 20px;
+        box-sizing: border-box;
+    }
+
+    table input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
 </head>
 <body>
 
@@ -12,27 +82,26 @@
 
 <form action="/web/editPersonalInfo" method="post">
     <table>
-
         <tr>
             <td>비밀번호</td>
             <td><input type="password" name="pw" value="${user.pw}"></td>
         </tr>
- 
         <tr>
             <td>전화번호</td>
             <td><input type="text" name="phone" value="${user.phone}"></td>
         </tr>
         <tr>
             <td>주소</td>
-            <td><input type="text" name="addr" value="${user.addr}">
-               <input type="text" name="id" value="${user.id}">
+            <td>
+                <input type="text" name="addr" value="${user.addr}">
             </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="정보 수정"></td>
+            <td colspan="2"><input type="submit" value="수정"></td>
         </tr>
     </table>
 </form>
 
 </body>
 </html>
+

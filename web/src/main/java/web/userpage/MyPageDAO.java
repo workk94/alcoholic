@@ -1,11 +1,11 @@
 package web.userpage;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import web.login.User;
 
 public class MyPageDAO {
     String driver = "oracle.jdbc.driver.OracleDriver";
@@ -28,7 +28,7 @@ public class MyPageDAO {
         return con;
     }
 
-    public void update(User user) {
+    public void update(web.model.User user) {
         Connection con = null;
         PreparedStatement pst = null;
 
@@ -47,7 +47,7 @@ public class MyPageDAO {
         close(pst, con);
     }
 
-    public void insertMember(User user) {
+    public void insertMember(web.model.User user) {
     	Connection con = dbcon();
     	PreparedStatement pst = null;
     	
