@@ -17,14 +17,23 @@ public class OrderServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		
+		
 		ArrayList<Order> cartlist = new ArrayList();
 		OrderDAO dao = new OrderDAO();
-		cartlist = dao.getOrderList();
+		cartlist = dao.getOrderList("user8");
 		
 		req.setAttribute("cartlist", cartlist);
 		
 		
 		req.getRequestDispatcher("WEB-INF/views/orderlist.jsp").forward(req, resp);
+		
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		
 		
 	}

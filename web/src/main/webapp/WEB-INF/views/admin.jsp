@@ -74,13 +74,17 @@
 				[<a href="/web/admin?p=<%=handler.getGrpEndPage()+1 %>">다음</a> ]
 			<%} %>
 			</div>
-        </div>
+       
+       <%String message = (String) request.getAttribute("message");%> </div>
        <script type="text/javascript">
        
        function deleteCheck(){
     	          return confirm("정말 삭제하시겠습니까?");
     	   }
-       
+       var message = "<%=message != null ? message : ""%>";
+		if (message !== "") {
+			alert(message);
+		}
        </script>
 
     </main>

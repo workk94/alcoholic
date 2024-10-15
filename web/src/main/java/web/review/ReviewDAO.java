@@ -7,6 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
+import web.model.User;
+import web.userpage.Order;
+
 public class ReviewDAO {
 
 	// DB 연결 정보
@@ -55,15 +60,18 @@ public class ReviewDAO {
 			rs = pst.executeQuery();
 			
 			while (rs.next()) {
-				String review_no = rs.getString(1);
-				String user_id = rs.getString(2);
-				String product_no = rs.getString(3);
-				String item_no = rs.getString(4);
-				String contents = rs.getString(5);
-				String rating = rs.getString(6);
-				String created_at = rs.getString(7);
+				int review_no = rs.getInt("review_no");
+                String user_id = rs.getString("user_id");
+                int product_no = rs.getInt("product_no");
+                String item_no = rs.getString("item_no");
+                String contents = rs.getString("contents");
+                String rating = rs.getString("rating");
+                String created_at = rs.getString("created_at");
+				 // User 객체 생성 및 초기화
+	            User user = new User();
+	            user.setId(user_id); // 사용자 ID 설정
 				
-				Review review = new Review(review_no, user_id, product_no ,item_no,contents,rating, created_at);
+				Review review = new Review(review_no, user, product_no ,item_no,contents,rating, created_at);
 				list.add(review);
 			}
 		} catch (SQLException e) {
@@ -104,7 +112,7 @@ public class ReviewDAO {
 	   
 	   
 	 //리뷰 상세 조회
-	   public Review selectOne(String review_no) {
+	   public Review selectOne(int review_no) {
 		
 		   Review review = null;
 		   String sql = "select * from reviewtbl where review_no=?";
@@ -115,19 +123,21 @@ public class ReviewDAO {
 		   try {
 			con = dbcon();
 			pst =con.prepareStatement(sql);
-			pst.setString(1, review_no);
+			pst.setInt(1, review_no);
 			rs = pst.executeQuery();
 			
-			if(rs.next()) {
-				String review_no1 = rs.getString("review_no");
-				String user_id = rs.getString("user_id");
-				String product_no = rs.getString("product_no");
-				String item_no = rs.getString("item_no");
-				String contents = rs.getString("contents");
-				String rating = rs.getString("rating");
-				String created_at = rs.getString("created_at");
+			if (rs.next()) {
+                String user_id = rs.getString("user_id");
+                int product_no = rs.getInt("product_no");
+                String item_no = rs.getString("item_no");
+                String contents = rs.getString("contents");
+                String rating = rs.getString("rating");
+                String created_at = rs.getString("created_at");
 				
-				review = new Review(review_no1, user_id,  product_no, item_no, contents, rating, created_at);
+				 // User 객체 생성 및 초기화
+	            User user = new User();
+	            user.setId(user_id); // 사용자 ID 설정
+				review = new Review(review_no, user,  product_no, item_no, contents, rating, created_at);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -153,7 +163,7 @@ public class ReviewDAO {
   
 			pst.setString(1, review.getContents());
 			pst.setString(2, review.getRating());
-			pst.setString(3, review.getReview_no());
+			pst.setInt(3, review.getReview_no());
 			
 	        row =pst.executeUpdate();
 			
@@ -166,7 +176,101 @@ public class ReviewDAO {
 		   return row;
 	   }
 
-	 //리뷰 삭제   
+	
+/*
+	   //리뷰추가
+	   public int addReview(Review review) {
+		   int row = 0;
+		    String sql = "INSERT INTO reviewtbl (review_no, user_id, product_no, item_no, contents, rating, created_at) VALUES (review_no_seq.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE)";
+		    Connection con = null;
+		    PreparedStatement pst = null;
+		    try {
+		    	con = dbcon();
+		    	pst = con.prepareStatement(sql);
+		    
+		        pst.setString(1, review.getUser_id());
+		        pst.setString(2, review.getProduct_no());
+		        pst.setString(3, review.getItem_no());
+		        pst.setString(4, review.getContents());
+		        pst.setString(5, review.getRating());
+
+		        row = pst.executeUpdate();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(pst, con); 
+		    } return row;
+	   }
+*/
+	   //리뷰추가
+	   public int addReview(HttpSession session, Review review) {
+		    int row = 0;
+		    String sql = "INSERT INTO reviewtbl (review_no, user_id, product_no, item_no, contents, rating, created_at) " +
+		                 "VALUES (review_no_seq.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE)";
+
+		    Connection con = null;
+		    PreparedStatement pst = null;
+
+		    // 로그인 확인
+		    if (review.getUser() == null) {
+		        throw new IllegalArgumentException("로그인 후 리뷰를 작성해주세요.");
+		    }
+
+		    String loggedInUserId = review.getUser().getId(); // 현재 사용자 ID 가져오기
+
+		    // DB에 리뷰 추가
+		    try {
+		        con = dbcon();
+		        pst = con.prepareStatement(sql);
+		        pst.setString(1, loggedInUserId); // 로그인된 사용자 ID
+		        pst.setInt(2, review.getProduct_no()); // product_no
+		        pst.setString(3, review.getItem_no()); // item_no
+		        pst.setString(4, review.getContents());
+		        pst.setString(5, review.getRating());
+
+		        row = pst.executeUpdate();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(pst, con);
+		    }
+		    return row;
+		}
+
+		
+
+	   public ArrayList<Review> getOrderItemsByUserId(String userId) {
+		   ArrayList<Review> orderItems = new ArrayList<>();
+		   String sql = "SELECT oi.item_no, oi.product_no " +
+		             "FROM order_itemtbl oi " +
+		             "JOIN ordertbl o ON oi.order_no = o.order_no " +
+		             "WHERE o.user_id = ?";
+		   Connection con = null;
+		   PreparedStatement pst = null;
+		   ResultSet rs = null;
+
+		    try {
+		        con = dbcon(); // 데이터베이스 연결
+		        pst = con.prepareStatement(sql);
+		        pst.setString(1, userId);
+		        rs = pst.executeQuery();
+
+		        while (rs.next()) {
+		        	Review item = new Review();
+		            item.setItem_no(rs.getString("item_no"));
+		            item.setProduct_no(rs.getInt("product_no")); 
+		            orderItems.add(item);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(rs, pst, con); // ResultSet, PreparedStatement, Connection 모두 닫기
+		    }
+		    return orderItems;
+		}
+
+	   
+	   //리뷰 삭제   
 	   public int delete(String review_no) {
 		   int row = 0;
 		   Connection con = null;		    
@@ -199,99 +303,7 @@ public class ReviewDAO {
 	    }
 	    return row;
 	}
-/*
-	   public int delete(String review_no) {
-		    int row = 0;
-		    Connection con = null;
-		    PreparedStatement pstDelete = null;
-		    PreparedStatement pstUpdate = null;
-
-		    try {
-		        con = dbcon();
-
-		        // 1. 리뷰 삭제
-		        String sqlDelete = "DELETE FROM reviewtbl WHERE review_no=?";
-		        pstDelete = con.prepareStatement(sqlDelete);
-		        pstDelete.setString(1, review_no);
-		        row = pstDelete.executeUpdate(); // 삭제된 행 수
-
-		        // 2. 리뷰 번호 재조정 (삭제된 번호보다 큰 모든 리뷰 번호를 1씩 감소)
-		        if (row > 0) { // 리뷰가 성공적으로 삭제된 경우
-		            String sqlUpdate = "UPDATE reviewtbl SET review_no = review_no - 1 WHERE review_no > ?";
-		            pstUpdate = con.prepareStatement(sqlUpdate);
-		            pstUpdate.setString(1, review_no);
-		            pstUpdate.executeUpdate();
-		        }
-
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    } finally {
-		        // 연결 종료는 finally 블록에서 수행
-		        close(pstDelete, con);
-		        close(pstUpdate, null);
-		    }
-		    return row; // 삭제된 리뷰 수를 반환
-		} 
-*/	   
-	   //리뷰추가
-	   public int addReview(Review review) {
-		   int row = 0;
-		    String sql = "INSERT INTO reviewtbl (review_no, user_id, product_no, item_no, contents, rating, created_at) VALUES (review_no_seq.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE)";
-		    Connection con = null;
-		    PreparedStatement pst = null;
-		    try {
-		    	con = dbcon();
-		    	pst = con.prepareStatement(sql);
-		    
-		        pst.setString(1, review.getUser_id());
-		        pst.setString(2, review.getProduct_no());
-		        pst.setString(3, review.getItem_no());
-		        pst.setString(4, review.getContents());
-		        pst.setString(5, review.getRating());
-
-		        row = pst.executeUpdate();
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    } finally {
-		        close(pst, con); 
-		    } return row;
-	   }
-/*	   
-	   //검색하기
-	   public ArrayList<Review> searchReviews(String searchType, String searchQuery) {
-		    // DB 연결 및 쿼리 생성
-		    ArrayList<Review> reviews = new ArrayList<>();
-		    String query = "SELECT * FROM reviewtbl WHERE " + searchType + " LIKE ?";
-		    Connection con = null;
-			PreparedStatement pst = null;
-			ResultSet rs = null;
-		    
-		    try {
-		        con = dbcon();
-		        pst = con.prepareStatement(query);
-		        pst.setString(1, "%" + searchQuery + "%");
-		        rs = pst.executeQuery();
-		        
-		        while (rs.next()) {
-		        	 String review_no = rs.getString("review_no");
-		             String user_id = rs.getString("user_id");
-		             String product_no = rs.getString("product_no");
-		             String item_no = rs.getString("item_no");
-		             String contents = rs.getString("contents");
-		             String rating = rs.getString("rating");
-		             String created_at = rs.getString("created_at"); // Date는 java.util.Date로 변환 가능
-		             Review review = new Review(review_no, user_id, product_no, item_no, contents, rating, created_at);
-		             reviews.add(review);
-		             }
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }finally {
-		        // 자원 해제
-		        close(rs, pst, con); // 기존의 close 메서드 사용
-		    }
-		    return reviews;
-		}
-*/
+	   
 	   
 	// 검색하기 (페이지네이션 적용)
 	   public ArrayList<Review> searchReviews(String searchType, String searchQuery, int currentPage, int pageSize) {
@@ -316,15 +328,18 @@ public class ReviewDAO {
 	           rs = pst.executeQuery();
 
 	           while (rs.next()) {
-	               String review_no = rs.getString("review_no");
+	        	   int review_no = rs.getInt("review_no");
 	               String user_id = rs.getString("user_id");
-	               String product_no = rs.getString("product_no");
+	               int product_no = rs.getInt("product_no");
 	               String item_no = rs.getString("item_no");
 	               String contents = rs.getString("contents");
 	               String rating = rs.getString("rating");
 	               String created_at = rs.getString("created_at");
 
-	               Review review = new Review(review_no, user_id, product_no, item_no, contents, rating, created_at);
+	               // User 객체 생성 및 초기화
+	               User user = new User();
+	               user.setId(user_id); // 사용자 ID 설정
+	               Review review = new Review(review_no, user, product_no, item_no, contents, rating, created_at);
 	               reviews.add(review);
 	           }
 	       } catch (SQLException e) {
@@ -360,8 +375,6 @@ public class ReviewDAO {
 
 		    return count;
 		}   
-	   
-	   
 	   
 	   
 	   

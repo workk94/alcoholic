@@ -27,9 +27,29 @@ public class AdminUpdate extends HttpServlet{
 		AdminService s = new AdminService();
 		s.updateAdmin(admin);
 		
-		ArrayList<Admin> list = s.getAdminList();
+		int pageSize = 10;
+		int grpSize = 5;
+
+		int totRecords = 90;
+		int currentPage = 1;
+
+		String p_ = req.getParameter("p");
+		if (p_ != null) {
+			currentPage = Integer.parseInt(p_);
+		}
+		
+		totRecords = s.getTotalCnt();
+
+		ArrayList<Admin> list = s.getPage(currentPage, pageSize);
+
+		PageHandler pageHandler = new PageHandler(pageSize, grpSize, totRecords, currentPage);
+		
+		
+		req.setAttribute("handler", pageHandler);
 		
 		req.setAttribute("list", list);
+		
+		
 		req.getRequestDispatcher("WEB-INF/views/admin.jsp").forward(req, resp);
 	}
 	

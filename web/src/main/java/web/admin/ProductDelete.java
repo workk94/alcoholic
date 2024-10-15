@@ -1,6 +1,8 @@
 package web.admin;
 
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +19,18 @@ public class ProductDelete extends HttpServlet {
 
 		
 		ProductService s = new ProductService();
-		s.deleteProduct(no);
+		try {
+			s.deleteProduct(no);
+			resp.sendRedirect("/web/admin_product");
+		} catch (SQLIntegrityConstraintViolationException e) {
+			req.setAttribute("message", "해당 상품은 삭제가 불가능합니다! (주문내역 존재)");
+			ArrayList<Product> list = s.getProductList();
+			req.setAttribute("list", list);
+			req.getRequestDispatcher("WEB-INF/views/admin_product.jsp").forward(req, resp);
+			e.printStackTrace();
+		}
 
-		resp.sendRedirect("/web/admin_product");
+		
 
 	}
 }

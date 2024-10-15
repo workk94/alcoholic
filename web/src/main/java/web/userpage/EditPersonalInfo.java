@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import web.model.User;
 import web.model.UserDAO;
 
+
 @WebServlet("/editPersonalInfo")
 public class EditPersonalInfo extends HttpServlet {
 

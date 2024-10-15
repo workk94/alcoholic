@@ -21,12 +21,14 @@
 			<div class="input_wrap">
 				<form action="${pageContext.request.contextPath}/adminlogin" method="post">
 					<p>
-						아이디 : <input type="text" name="user_id" id="user_id">
+						아이디 : <input type="text" name="admin_id" id="user_id">
 					</p>
 					<p>
-						비밀번호 : <input type="password" name="user_pw" id="user_pw">
+						비밀번호 : <input type="password" name="admin_pw" id="user_pw">
 					</p>
 					<button id="loginBtn">로그인</button>
+					<!-- 서버에서 전달된 메시지를 숨김 -->
+					<input type="hidden" id="msg" value="${msg}">
 				</form>
 				<a href="${pageContext.request.contextPath}/login">유저 로그인</a>
 			</div>

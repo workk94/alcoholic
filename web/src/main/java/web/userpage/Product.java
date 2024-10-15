@@ -10,12 +10,11 @@ public class Product {
 	String img_url;
 
 
-	public Product(String prod_no, String name, String category, int quantity, int price, String img_url) {
+	public Product(String prod_no, String name, String category,  int price, String img_url) {
 		super();
 		this.prod_no = prod_no;
 		this.name = name;
 		this.category = category;
-		this.quantity = quantity;
 		this.price = price;
 		this.img_url = img_url;
 	}

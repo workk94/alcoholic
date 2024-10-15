@@ -9,28 +9,55 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/updatecart")
-public class UpdateCartServlet extends HttpServlet {
+import web.model.User;
+
+@WebServlet("/ordercreate")
+public class OrderCreateServlet extends HttpServlet {
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+      
+    	
+    	
+    	// 로그인 정보 세션에서 가져오기
+    	
+    	HttpSession   session  = request.getSession();    	
+    	User loginUser  = (User) session.getAttribute("currentUser");
+    	
+    	
+    	String loginId="";
+    	
+    	if( loginUser != null  ) {
+    		loginId = loginUser.getId();
+    		
+    	}
+    	
+    	System.out.println(" login id: "  +  loginId);
+     
+    	
         // 현재 세션에서 장바구니 가져오기
     	  
         int quantity=   Integer.parseInt( request.getParameter("quantity"));
         String code= request.getParameter("code");
         
       
+        //주문번호 발생 
+        //주문정보 생성   insert 
+        //주무아이템 생성   insert
+        
+        OrderDAO order =new OrderDAO();        
+        int orderseq = order.selectseqenceNo();  
+        
+        
+        
+        
+        order.InsertOrder(loginId, orderseq);
+        order.insertOrderItem(orderseq, code, quantity);
+        		
+         
+        
         
         //세션 삭제, 장바구니 삭제
-    	 deleteSession( request , code);      	
-    	
-    	 ProductDAO dao = new ProductDAO();
-         dao.UpdateOrderItem(code, quantity);
-
-        // 장바구니를 다시 세션에 저장
-      
-        
-        
+    	 deleteSession( request , code);       
 
         // 장바구니 페이지로 리다이렉트
         response.sendRedirect(request.getContextPath() + "/order");
@@ -58,12 +85,7 @@ public class UpdateCartServlet extends HttpServlet {
             }            
             
             cartlist.remove(search); 
-            
-            System.out.println("삭제후 ==>") ;
-            
-            System.out.println( cartlist);
-            
-          
+         
         }
     
     }

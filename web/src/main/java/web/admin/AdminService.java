@@ -1,5 +1,6 @@
 package web.admin;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 public class AdminService {
@@ -17,7 +18,7 @@ public class AdminService {
 	public int updateAdmin(Admin admin) {
 		return dao.update(admin);
 	}
-	public int deleteAdmin(String id) {
+	public int deleteAdmin(String id) throws SQLIntegrityConstraintViolationException {
 		return dao.delete(id);
 	}
 	public ArrayList<Admin> getPage(int currentPage, int pageSize){

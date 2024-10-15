@@ -31,7 +31,7 @@
                                 <p>Category : <select name="category" id="category">
                                         <option id="none" value="none" disabled selected>=== 선택 ===</option>
                                         <option value="WINE">WINE</option>
-                                        <option value="WHISKY">WHISKY</option>
+                                        <option value="WHISKEY">WHISKEY</option>
                                     </select> </p>
                                 <p>이름 : <input id="name" name="name" type="text"></p>
                                 <p>가격 : <input id="price" name="price" type="text">
