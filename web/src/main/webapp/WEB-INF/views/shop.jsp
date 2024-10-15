@@ -9,69 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<style>
-.item_wrap {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	padding: 10px;
-	border: 1px solid black;
-}
-
-.item_img {
-	flex: 1;
-	max-width: 50%;
-	text-align: center;
-	border: 1px solid black;
-}
-
-.item_img img {
-	width: 100%;
-	height: auto;
-	border: 1px solid black;
-}
-
-.item_info {
-	flex: 1;
-	max-width: 50%;
-	padding-left: 20px;
-	border: 1px solid black;
-}
-
-.product_name {
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-bottom: 10px;
-	border: 1px solid black;
-}
-
-.product_category {
-	font-size: 1em;
-	color: #888;
-	margin-bottom: 10px;
-	border: 1px solid black;
-}
-
-.product_price {
-	font-size: 1.2em;
-	color: #000;
-	margin-bottom: 20px;
-	border: 1px solid black;
-}
-
-.addToCart {
-	padding: 10px 20px;
-	margin-right: 10px;
-	cursor: pointer;
-	border: 1px solid black;
-	background-color: #ff6b6b;
-	color: white;
-}
-</style>
-<script>
-	
-</script>
+<link href="css/shop.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<!-- header -->

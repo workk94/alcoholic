@@ -133,8 +133,8 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a class="main_menu" href="">WHISKEY</a></li>
-                    <li><a class="main_menu" href="">WINE</a></li>
+                    <li><a class="main_menu" href="${pageContext.request.contextPath}/list?category=whiskey">WHISKEY</a></li>
+                    <li><a class="main_menu" href="${pageContext.request.contextPath}/list?category=wine">WINE</a></li>
                     <li><a class="main_menu" href="${pageContext.request.contextPath}/review">REVIEW</a></li>
                      <li>
                         <a class="main_menu" href="">MYPAGE</a>
@@ -155,7 +155,7 @@
                 </c:when>
                 <c:otherwise>
                     <p>${sessionScope.currentUser.name}님, 안녕하세요.</p>
-                    <a href="${pageContext.request.contextPath}/logout">LOGOUT</a>
+                    <a href="${pageContext.request.contextPath}/logout?type=user">LOGOUT</a>
                 </c:otherwise>
             </c:choose>
         </div>
