@@ -81,7 +81,7 @@ public class OrderDAO {
 		return list;
 	}
 	
-	//상세 내역 출력 
+	//상세 내역 출력 (주문번호 , 주문날짜, 아이디, 주문아이템번호, 상품번호 , 상품이름, 카테고리 , 상품가격, 구매수량, 이미지주소)
 		public ArrayList<Order> selectOne(String no) {
 			Connection con = null;
 			PreparedStatement pst = null;

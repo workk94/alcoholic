@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 public class AdminDAO {
@@ -139,7 +140,7 @@ public class AdminDAO {
 	}
 		
 	//고객 삭제
-	int delete(String id) {
+	int delete(String id) throws SQLIntegrityConstraintViolationException {
 		int rRow = 0;
 		Connection con = dbcon();
 		PreparedStatement pst = null;
@@ -148,7 +149,10 @@ public class AdminDAO {
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, id);
-			pst.executeUpdate();
+			rRow = pst.executeUpdate();
+		}catch (SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+			throw e;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 
@@ -140,7 +141,7 @@ public class ProductDAO {
 	}
 		
 	//상품 삭제
-	int delete(String no) {
+	int delete(String no) throws SQLIntegrityConstraintViolationException {
 		int rRow = 0;
 		Connection con = dbcon();
 		PreparedStatement pst = null;
@@ -149,8 +150,12 @@ public class ProductDAO {
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, no);
-			pst.executeUpdate();
-		} catch (SQLException e) {
+			rRow = pst.executeUpdate();
+		} catch (SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {

@@ -1,5 +1,6 @@
 package web.admin;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 public class ProductService {
@@ -15,7 +16,7 @@ public class ProductService {
 	public int updateProduct(Product product) {
 		return dao.update(product);
 	}
-	public int deleteProduct(String no) {
+	public int deleteProduct(String no) throws SQLIntegrityConstraintViolationException {
 		return dao.delete(no);
 	}
 	public int addProduct(Product product) {
