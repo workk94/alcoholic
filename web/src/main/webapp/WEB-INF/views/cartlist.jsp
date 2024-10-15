@@ -104,7 +104,7 @@ td {
 						<td> <img alt="<%=s.getName()%>" src="<%=s.getImg_url()%>"> </td>
 						<td><%=s.getProd_no()%></td>
 						<td><%=s.getName()%></td>
-						<td><input type="number" value="1" min="0"
+						<td><input type="number" value="<%=s.getQuantity() %>" min="0"
 							name="quantity" class="quantbtn"></td>
 						<td>
 						<input type="hidden" name="Date" value="sysdate">

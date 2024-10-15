@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import web.pages.ProductDTO;
+import web.userpage.ProductDAO;
 
 public class ShopDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -31,6 +32,51 @@ public class ShopDAO {
 		}
 
 		return con;
+	}
+
+	public ArrayList<ProductDTO> getListPage(int page, int pageSize) {
+
+		int start = (page - 1) * pageSize + 1;
+		int end = page * pageSize;
+
+		String sql = "SELECT * FROM ( " + "SELECT ROWNUM rnum, product_no, name, category, price, img_url "
+				+ "FROM PRODUCTTBL " + "WHERE ROWNUM <= ? " + ") WHERE rnum >= ?";
+
+		ArrayList<ProductDTO> list = new ArrayList<>();
+		try (Connection con = dbCon(); PreparedStatement pst = con.prepareStatement(sql)) {
+			pst.setInt(1, end);
+			pst.setInt(2, start);
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					ProductDTO p = new ProductDTO(rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+							rs.getString(6));
+					list.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	public int getTotal() {
+		String sql = " select count(*) from PRODUCTTBL ";
+
+		int count = 0;
+		try (Connection con = dbCon();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();) {
+
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return count;
 	}
 
 	public ArrayList<ProductDTO> selectAllProduct() {
@@ -69,8 +115,8 @@ public class ShopDAO {
 
 		try (Connection con = dbCon(); PreparedStatement pst = con.prepareStatement(sql);) {
 			pst.setString(1, category_);
-			
-			try (ResultSet rs = pst.executeQuery()){
+
+			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
 					String productNo = rs.getString(1);
 					String name = rs.getString(2);
@@ -126,4 +172,40 @@ public class ShopDAO {
 
 		return product;
 	}
+
+	public ArrayList<ProductDTO> selectProductByName(String name) {
+
+		String sql = "SELECT * FROM PRODUCTTBL WHERE name LIKE ?";
+		ArrayList<ProductDTO> list = new ArrayList<>();
+
+		try (Connection con = dbCon(); PreparedStatement pst = con.prepareStatement(sql);) {
+			 pst.setString(1, "%" + name + "%");
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					ProductDTO product = new ProductDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4),
+							rs.getString(5));
+					
+					list.add(product);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	public static void main(String[] args) {
+		ShopDAO dao = new ShopDAO();
+		
+		ArrayList<ProductDTO> list = dao.selectProductByName("블랙");
+		for(ProductDTO p : list) {
+			System.out.println(p);
+		}
+	}
+	
 }
