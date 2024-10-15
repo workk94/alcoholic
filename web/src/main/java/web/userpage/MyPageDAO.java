@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import web.model.User;
 
+
 public class MyPageDAO {
     String driver = "oracle.jdbc.driver.OracleDriver";
     String url = "jdbc:oracle:thin:@localhost:1521:testdb";
