@@ -31,7 +31,7 @@
             <table>
                 <tr><th>리뷰 번호</th><td><%= review.getReview_no() %></td></tr>
                 <tr><th>작성자</th><td><%= review.getUser_id() %></td></tr>
-                <tr><th>제품 번호</th><td><input id="ssn" name="ssn" type="text" value="<%= review.getProduct_no() %>" readonly="readonly"></td></tr>
+                <tr><th>제품 번호</th><td><%= review.getProduct_no() %></td></tr>
                 <tr><th>아이템 번호</th><td><%= review.getItem_no() %></td></tr>
                 <tr><th>내용</th><td><%= review.getContents() %></td></tr>
                 <tr><th>평점</th><td><%= review.getRating() %></td></tr>
