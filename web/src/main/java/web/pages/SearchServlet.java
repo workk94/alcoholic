@@ -20,6 +20,8 @@ public class SearchServlet extends HttpServlet {
 		String keyword = req.getParameter("s_keyword");
 		System.out.println(keyword);
 		
+		keyword = keyword.toUpperCase();
+		
 		ShopService service = new ShopService();
 		ArrayList<ProductDTO> list = service.searchProductList(keyword);
 		System.out.println(list);

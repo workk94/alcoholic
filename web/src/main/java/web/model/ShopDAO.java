@@ -118,11 +118,11 @@ public class ShopDAO {
 
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					String productNo = rs.getString(1);
-					String name = rs.getString(2);
-					String category = rs.getString(3);
-					int price = rs.getInt(4);
-					String imgUrl = rs.getString(5);
+					String productNo = rs.getString("product_no");
+					String name = rs.getString("name");
+					String category = rs.getString("category");
+					int price = rs.getInt("price");
+					String imgUrl = rs.getString("img_url");
 
 					ProductDTO product = new ProductDTO(productNo, name, category, price, imgUrl);
 					list.add(product);
@@ -198,5 +198,13 @@ public class ShopDAO {
 
 		return list;
 	}
-
+	
+	public static void main(String[] args) {
+		ShopDAO dao = new ShopDAO();
+		ArrayList<ProductDTO> list = dao.selectProductByCat("wine");
+		System.out.println(list.toString());
+		for(ProductDTO p : list) {
+			System.out.println(p);
+		}
+	}
 }
